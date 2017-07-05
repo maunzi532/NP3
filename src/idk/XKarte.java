@@ -20,8 +20,11 @@ public class XKarte
 
 	public static void init()
 	{
-		kamx = aktuell.xw * fwx / 2;
-		kamy = aktuell.yw * fwy / 2;
+		if(aktuell != null)
+		{
+			kamx = aktuell.xw * fwx / 2;
+			kamy = aktuell.yw * fwy / 2;
+		}
 		sichtx = 8;
 		sichty = 6;
 	}
@@ -40,7 +43,8 @@ public class XKarte
 		d.calc();
 		maus(xp, yp);
 		mark.verarbeite();
-		aktuell.tick();
+		if(aktuell != null)
+			aktuell.tick();
 		aufzeichnen(gd);
 		kamera();
 	}
@@ -55,7 +59,7 @@ public class XKarte
 		gui.removeIf(UIAnschluss::weg);
 		int xcal = d.xcal(xp);
 		int ycal = d.ycal(yp);
-		if(cl == null && xcal >= 0 && ycal >= 0 && xcal < aktuell.xw * d.fwx && ycal < aktuell.yw * d.fwy)
+		if(aktuell != null && cl == null && xcal >= 0 && ycal >= 0 && xcal < aktuell.xw * d.fwx && ycal < aktuell.yw * d.fwy)
 			mark.mdk(xcal / d.fwx, ycal / d.fwy, aktuell);
 		else
 			mark.mdk(-1, -1, null);
@@ -63,15 +67,18 @@ public class XKarte
 
 	public static void aufzeichnen(Graphics2D gd)
 	{
-		for(int xi = -d.sichtx - 1; xi <= d.sichtx + 1; xi++)
-			for(int yi = -d.sichty - 1; yi <= d.sichty + 1; yi++)
-				aktuell.fliese(d.xkm + xi, d.ykm + yi).zeichne(gd,
-						d.xks2 + d.xdfw * xi, d.yks2 + d.ydfw * yi, d.xdfw, d.ydfw);
-		for(KObjekt c : aktuell.objekte)
-			if(c.existent && c.x + 1 >= d.xkm - d.sichtx && c.y + 1 >= d.ykm - d.sichty
-					&& c.x + c.xg - 1 <= d.xkm + d.sichtx && c.y + c.yg - 1 <= d.ykm + d.sichty)
-				c.zeichne(gd, d.xort(c.x, c.sx), d.yort(c.y, c.sy), d.xdfw, d.ydfw);
-		mark.zeichne(gd, aktuell, d);
+		if(aktuell != null)
+		{
+			for(int xi = -d.sichtx - 1; xi <= d.sichtx + 1; xi++)
+				for(int yi = -d.sichty - 1; yi <= d.sichty + 1; yi++)
+					aktuell.fliese(d.xkm + xi, d.ykm + yi).zeichne(gd,
+							d.xks2 + d.xdfw * xi, d.yks2 + d.ydfw * yi, d.xdfw, d.ydfw);
+			for(KObjekt c : aktuell.objekte)
+				if(c.existent && c.x + 1 >= d.xkm - d.sichtx && c.y + 1 >= d.ykm - d.sichty
+						&& c.x + c.xg - 1 <= d.xkm + d.sichtx && c.y + c.yg - 1 <= d.ykm + d.sichty)
+					c.zeichne(gd, d.xort(c.x, c.sx), d.yort(c.y, c.sy), d.xdfw, d.ydfw);
+			mark.zeichne(gd, aktuell, d);
+		}
 		for(int i = gui.size() - 1; i >= 0; i--)
 			gui.get(i).aufzeichnen(gd, d);
 	}

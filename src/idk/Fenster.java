@@ -3,7 +3,7 @@ package idk;
 import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
-import z.sweeper.*;
+import z.dec.*;
 
 public class Fenster
 {
@@ -16,7 +16,7 @@ public class Fenster
 	public static void main(String[] args)
 	{
 		initFenster();
-		XKarte.mark = new SweeperMark();
+		XKarte.mark = new DecMark();
 		XKarte.init();
 		while(true)
 		{
@@ -50,6 +50,8 @@ public class Fenster
 		fenster.setLocation((bildschirm.width - flaeche.width) / 2, (bildschirm.height - flaeche.height) / 2);
 		bild = new BufferedImage(flaeche.width, flaeche.height, BufferedImage.TYPE_INT_ARGB_PRE);
 		gd = bild.createGraphics();
+		gd.setColor(Color.BLACK);
+		gd.fillRect(0, 0, flaeche.width, flaeche.height);
 		TA.einbau(fenster);
 		fenster.setVisible(true);
 		while(!fenster.hasFocus())
