@@ -1,6 +1,5 @@
 package z.sweeper;
 
-import idk.*;
 import java.util.*;
 import karte.*;
 
@@ -17,20 +16,6 @@ public class SweeperKarte extends Karte
 		f.type = 0;
 		f.state = 0;
 		aktualisieren(1, 1);
-	}
-
-	@Override
-	public void tick(Mark mark)
-	{
-		if(mark.hover.existent && fliese(mark.hover.x, mark.hover.y) instanceof SweeperFeld)
-		{
-			SweeperFeld sf = (SweeperFeld) fliese(mark.hover.x, mark.hover.y);
-			if(TA.take[201] == 2)
-				sf.aufdecken(0);
-			if(TA.take[203] == 2)
-				sf.aufdecken(1);
-		}
-		super.tick(mark);
 	}
 
 	int[] ortNum(int x, int y)

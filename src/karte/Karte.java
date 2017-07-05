@@ -50,7 +50,7 @@ public abstract class Karte
 		return k1.x + k1.xg - 1 >= k2.x && k1.x <= k2.x + k2.xg - 1 && k1.y + k1.yg - 1 >= k2.y && k1.y <= k2.y + k2.yg - 1;
 	}
 
-	public void tick(Mark mark)
+	public void tick()
 	{
 		for(KObjekt k : objekte)
 			k.tick();

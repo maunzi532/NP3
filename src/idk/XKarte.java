@@ -1,8 +1,6 @@
 package idk;
 
-import auftrag.*;
 import interf.*;
-import interf.MenuItem;
 import java.awt.*;
 import java.util.*;
 import karte.*;
@@ -25,11 +23,11 @@ public class XKarte
 
 	public static void init(Graphics2D gd)
 	{
-		aktuell = new SweeperKarte(100, 100);
+		aktuell = new SweeperKarte(40, 40);
 		karten.add(aktuell);
 		kamx = aktuell.xw * fwx / 2;
 		kamy = aktuell.yw * fwy / 2;
-		mark = new Mark();
+		mark = new SweeperMark();
 		aktuell.objekte.add(new KChara(0, 0, 2, 2, true, true, aktuell));
 		aktuell.objekte.add(new KChara(2, 2, 1, 1, true, true, aktuell));
 		//kamLock = aktuell.objekte.get(1);
@@ -55,6 +53,8 @@ public class XKarte
 		d.kamy = kamy;
 		d.calc();
 		maus(xp, yp);
+		mark.verarbeite();
+		aktuell.tick();
 		aufzeichnen(gd);
 		kamera();
 	}
@@ -67,31 +67,12 @@ public class XKarte
 		if(cl != null)
 			cl.onFokus();
 		gui.removeIf(UIAnschluss::weg);
-		if(cl == null)
-		{
-			int xcal = d.xcal(xp);
-			int ycal = d.ycal(yp);
-			if(xcal >= 0 && ycal >= 0 && xcal < aktuell.xw * d.fwx && ycal < aktuell.yw * d.fwy)
-				mark.mdk(xcal / d.fwx, ycal / d.fwy, aktuell);
-			else
-				mark.mdk(-1, -1, null);
-		}
+		int xcal = d.xcal(xp);
+		int ycal = d.ycal(yp);
+		if(cl == null && xcal >= 0 && ycal >= 0 && xcal < aktuell.xw * d.fwx && ycal < aktuell.yw * d.fwy)
+			mark.mdk(xcal / d.fwx, ycal / d.fwy, aktuell);
 		else
 			mark.mdk(-1, -1, null);
-		aktuell.tick(mark);
-		if(mark.fokus.existent && mark.ziel.existent)
-		{
-			if(mark.ziel.marked != null)
-			{
-				gui.add(new UIAnschluss(aktuell, mark.fokus.marked, 1, -1,
-						new MenuItem("Wugutest", false, 2, 3, 1, 1, 1, 3, 1, 1, 1)));
-				new FolgeZiel(mark.ziel.marked, 2).an((KChara) mark.fokus.marked);
-			}
-			else
-				new GeheZuZiel(new Koordinate(mark.ziel.x, mark.ziel.y),
-						aktuell.begehbar(mark.mitFokus(mark.ziel), mark.fokus.marked) ? 0 : 2).an((KChara) mark.fokus.marked);
-			mark.ziel.existent = false;
-		}
 	}
 
 	public static void aufzeichnen(Graphics2D gd)

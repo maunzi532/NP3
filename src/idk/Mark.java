@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.*;
 import karte.*;
 
-public class Mark
+public abstract class Mark
 {
 	public Marker fokus;
 	public Marker ziel;
@@ -23,25 +23,27 @@ public class Mark
 	public void mdk(int nx, int ny, Karte aktuell)
 	{
 		if(aktuell != null)
+		{
 			hover(nx, ny, aktuell);
+			if(TA.take[201] == 2)
+				fokus.marked = getHoverAusw();
+			fokus.existent = fokus.marked != null;
+			if(TA.take[203] == 2)
+			{
+				if(getHoverAusw() != null)
+					ziel.marked = getHoverAusw();
+				else
+				{
+					ziel.auf = hover.auf;
+					ziel.marked = null;
+					ziel.x = hover.x;
+					ziel.y = hover.y;
+				}
+				ziel.existent = true;
+			}
+		}
 		else
 			hover.existent = false;
-		if(TA.take[201] == 2)
-			fokus.marked = getHoverAusw();
-		fokus.existent = fokus.marked != null;
-		if(TA.take[203] == 2)
-		{
-			if(getHoverAusw() != null)
-				ziel.marked = getHoverAusw();
-			else
-			{
-				ziel.auf = hover.auf;
-				ziel.marked = null;
-				ziel.x = hover.x;
-				ziel.y = hover.y;
-			}
-			ziel.existent = true;
-		}
 	}
 
 	public void hover(int nx, int ny, Karte aktuell)
@@ -87,6 +89,8 @@ public class Mark
 			return new KOrt(m.x, m.y, fokus.marked.xg, fokus.marked.yg);
 		return new KOrt(m.x, m.y, 1, 1);
 	}
+
+	public abstract void verarbeite();
 
 	public void zeichne(Graphics2D gd, Karte ak, PlD d)
 	{
