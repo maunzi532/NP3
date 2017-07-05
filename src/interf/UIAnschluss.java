@@ -54,24 +54,26 @@ public class UIAnschluss
 
 	public void aufzeichnen(Graphics2D gd, PlD d)
 	{
-		inhalt.aufzeichnen(gd, bloc(d));
+		if(auf == null || auf == XKarte.aktuell)
+			inhalt.aufzeichnen(gd, bloc(d));
 	}
 
 	public Clickbar registerClick(int cx, int cy, PlD d)
 	{
-		return inhalt.registerClick(cx, cy, bloc(d));
+		if(auf == null || auf == XKarte.aktuell)
+			return inhalt.registerClick(cx, cy, bloc(d));
+		return null;
 	}
 
 	public boolean weg()
 	{
+		if(auf != null && auf != XKarte.aktuell)
+			return false;
 		int re = inhalt.weg();
 		if(re != 0)
 			code(re);
 		return re > 0;
 	}
 
-	public void code(int re)
-	{
-
-	}
+	public void code(int re){}
 }

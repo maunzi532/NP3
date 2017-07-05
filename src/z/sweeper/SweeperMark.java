@@ -21,6 +21,8 @@ public class SweeperMark extends Mark
 			public void code(int re)
 			{
 				System.out.println(re);
+				if(re == 1)
+					XKarte.aktuell = null;
 			}
 		});
 	}
@@ -28,6 +30,8 @@ public class SweeperMark extends Mark
 	@Override
 	public void verarbeite()
 	{
+		if(XKarte.aktuell == null)
+			return;
 		if(hover.existent && XKarte.aktuell.fliese(hover.x, hover.y) instanceof SweeperFeld)
 		{
 			SweeperFeld sf = (SweeperFeld) XKarte.aktuell.fliese(hover.x, hover.y);
@@ -36,12 +40,12 @@ public class SweeperMark extends Mark
 			if(TA.take[203] == 2)
 				sf.aufdecken(1);
 		}
-		if(fokus.marked != null && ziel.existent)
+		if(fokus.existent && fokus.marked != null && ziel.existent)
 		{
 			if(ziel.marked != null)
 			{
-				//XKarte.gui.add(new UIAnschluss(XKarte.aktuell, fokus.marked, 1, -1,
-						//new MenuItem("Wugutest", false, 2, 3, 1, 1, 1, 3, 1, 1, 1)));
+				XKarte.gui.add(new UIAnschluss(XKarte.aktuell, fokus.marked, 1, -1,
+						new MenuItem("Wugutest", false, 2, 3, 1, 1, 1, 3, 1, 1, 1)));
 				new FolgeZiel(ziel.marked, 2).an((KChara) fokus.marked);
 			}
 			else

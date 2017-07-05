@@ -46,7 +46,8 @@ public class XKarte
 		if(aktuell != null)
 			aktuell.tick();
 		aufzeichnen(gd);
-		kamera();
+		if(aktuell != null)
+			kamera();
 	}
 
 	public static void maus(int xp, int yp)
@@ -78,6 +79,11 @@ public class XKarte
 						&& c.x + c.xg - 1 <= d.xkm + d.sichtx && c.y + c.yg - 1 <= d.ykm + d.sichty)
 					c.zeichne(gd, d.xort(c.x, c.sx), d.yort(c.y, c.sy), d.xdfw, d.ydfw);
 			mark.zeichne(gd, aktuell, d);
+		}
+		else
+		{
+			gd.setColor(Color.BLACK);
+			gd.fillRect(0, 0, d.xw, d.yw);
 		}
 		for(int i = gui.size() - 1; i >= 0; i--)
 			gui.get(i).aufzeichnen(gd, d);
