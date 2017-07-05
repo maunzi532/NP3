@@ -4,8 +4,6 @@ import interf.*;
 import java.awt.*;
 import java.util.*;
 import karte.*;
-import pfadfind.*;
-import z.sweeper.*;
 
 public class XKarte
 {
@@ -15,29 +13,17 @@ public class XKarte
 	public static ArrayList<UIAnschluss> gui = new ArrayList<>();
 	public static KObjekt kamLock;
 	public static int kamx, kamy;
+	public static int sichtx, sichty;
 	public static final int fwx = 20;
 	public static final int fwy = 20;
-	public static int sichtx = 8;
-	public static int sichty = 6;
 	public static PlD d;
 
-	public static void init(Graphics2D gd)
+	public static void init()
 	{
-		aktuell = new SweeperKarte(40, 40);
-		karten.add(aktuell);
 		kamx = aktuell.xw * fwx / 2;
 		kamy = aktuell.yw * fwy / 2;
-		mark = new SweeperMark();
-		aktuell.objekte.add(new KChara(0, 0, 2, 2, true, true, aktuell));
-		aktuell.objekte.add(new KChara(2, 2, 1, 1, true, true, aktuell));
-		//kamLock = aktuell.objekte.get(1);
-		gui.add(new UIAnschluss(1, 1, new MultiOption(new String[]{"W1", "W2"}, 0, 2, 0, 1, 0, 1, 1, 5, 1, 20))
-		{
-			public void code(int re)
-			{
-				System.out.println(re);
-			}
-		});
+		sichtx = 8;
+		sichty = 6;
 	}
 
 	public static void tick(Graphics2D gd, int xw, int yw, int xp, int yp)

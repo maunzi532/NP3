@@ -26,8 +26,18 @@ public abstract class Mark
 		{
 			hover(nx, ny, aktuell);
 			if(TA.take[201] == 2)
-				fokus.marked = getHoverAusw();
-			fokus.existent = fokus.marked != null;
+			{
+				if(getHoverAusw() != null)
+					fokus.marked = getHoverAusw();
+				else
+				{
+					fokus.auf = hover.auf;
+					fokus.marked = null;
+					fokus.x = hover.x;
+					fokus.y = hover.y;
+				}
+				fokus.existent = true;
+			}
 			if(TA.take[203] == 2)
 			{
 				if(getHoverAusw() != null)
@@ -85,7 +95,7 @@ public abstract class Mark
 
 	public KOrt mitFokus(Marker m)
 	{
-		if(fokus.existent)
+		if(fokus.existent && fokus.marked != null)
 			return new KOrt(m.x, m.y, fokus.marked.xg, fokus.marked.yg);
 		return new KOrt(m.x, m.y, 1, 1);
 	}
@@ -121,7 +131,7 @@ public abstract class Mark
 			{
 				mx = m.x;
 				my = m.y;
-				if(fokus.marked != null)
+				if(fokus.existent && fokus.marked != null)
 				{
 					mxg = fokus.marked.xg;
 					myg = fokus.marked.yg;
