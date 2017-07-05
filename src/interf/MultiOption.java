@@ -1,6 +1,6 @@
 package interf;
 
-public abstract class MultiOption extends UITeil
+public class MultiOption extends UITeil
 {
 	int lockon;
 
@@ -24,22 +24,14 @@ public abstract class MultiOption extends UITeil
 		}
 	}
 
-	public boolean weg()
+	public int weg()
 	{
-		int option = -1;
 		for(int i = 0; i < in.size(); i++)
 		{
 			UITeil in2 = in.get(i);
-			if(in2.weg())
-			{
-				option = i;
-				weg = true;
-			}
+			if(in2.weg() > 0)
+				weg = i + 1;
 		}
-		if(weg)
-			chosen(option);
 		return weg;
 	}
-
-	public abstract void chosen(int option);
 }

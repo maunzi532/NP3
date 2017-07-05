@@ -6,7 +6,7 @@ import java.util.*;
 public class UITeil
 {
 	public static final Font basicFont = new Font("Ubuntu", Font.PLAIN, 0);
-	public boolean weg;
+	public int weg;
 	public int cascade;
 	public int[] location;
 	public ArrayList<UITeil> in = new ArrayList<>();
@@ -50,16 +50,17 @@ public class UITeil
 		return null;
 	}
 
-	public boolean weg()
+	public int weg()
 	{
 		Boolean allC = null;
 		for(int i = 0; i < in.size(); i++)
 		{
 			UITeil in2 = in.get(i);
-			if(in2.weg())
+			int weg1 = in2.weg();
+			if(weg1 > 0)
 			{
 				if(in2.cascade == 2)
-					weg = true;
+					weg = weg1;
 				if(in2.cascade == 1 && allC == null)
 					allC = true;
 				in.remove(i);
@@ -69,7 +70,7 @@ public class UITeil
 				allC = false;
 		}
 		if(allC != null && allC)
-			weg = true;
+			weg = 1;
 		return weg;
 	}
 

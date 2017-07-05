@@ -13,23 +13,19 @@ public class XKarte
 {
 	public static ArrayList<Karte> karten = new ArrayList<>();
 	public static Karte aktuell;
-	public static KObjekt kamLock;
 	public static Mark mark;
 	public static ArrayList<UIAnschluss> gui = new ArrayList<>();
+	public static KObjekt kamLock;
 	public static int kamx, kamy;
 	public static final int fwx = 20;
 	public static final int fwy = 20;
 	public static int sichtx = 8;
 	public static int sichty = 6;
-	public static Font namen = new Font("Arial", Font.PLAIN, 20);
-	public static FontMetrics fm;
 	public static PlD d;
 
 	public static void init(Graphics2D gd)
 	{
-		gd.setFont(namen);
-		fm = gd.getFontMetrics();
-		aktuell = new SweeperKarte(12, 9);
+		aktuell = new SweeperKarte(100, 100);
 		karten.add(aktuell);
 		kamx = aktuell.xw * fwx / 2;
 		kamy = aktuell.yw * fwy / 2;
@@ -37,14 +33,13 @@ public class XKarte
 		aktuell.objekte.add(new KChara(0, 0, 2, 2, true, true, aktuell));
 		aktuell.objekte.add(new KChara(2, 2, 1, 1, true, true, aktuell));
 		//kamLock = aktuell.objekte.get(1);
-		gui.add(new UIAnschluss(1, 1, new MultiOption(new String[]{"W1", "W2"}, 0, 2, 0, 1, 0, 1, 1, 5, 1, 20)
+		gui.add(new UIAnschluss(1, 1, new MultiOption(new String[]{"W1", "W2"}, 0, 2, 0, 1, 0, 1, 1, 5, 1, 20))
 		{
-			@Override
-			public void chosen(int option)
+			public void code(int re)
 			{
-				System.out.println(option);
+				System.out.println(re);
 			}
-		}));
+		});
 	}
 
 	public static void tick(Graphics2D gd, int xw, int yw, int xp, int yp)
@@ -64,21 +59,6 @@ public class XKarte
 		kamera();
 	}
 
-	public static void aufzeichnen(Graphics2D gd)
-	{
-		for(int xi = -d.sichtx - 1; xi <= d.sichtx + 1; xi++)
-			for(int yi = -d.sichty - 1; yi <= d.sichty + 1; yi++)
-				aktuell.fliese(d.xkm + xi, d.ykm + yi).zeichne(gd,
-						d.xks2 + d.xdfw * xi, d.yks2 + d.ydfw * yi, d.xdfw, d.ydfw);
-		for(KObjekt c : aktuell.objekte)
-			if(c.existent && c.x + 1 >= d.xkm - d.sichtx && c.y + 1 >= d.ykm - d.sichty
-					&& c.x + c.xg - 1 <= d.xkm + d.sichtx && c.y + c.yg - 1 <= d.ykm + d.sichty)
-				c.zeichne(gd, d.xort(c.x, c.sx), d.yort(c.y, c.sy), d.xdfw, d.ydfw);
-		mark.zeichne(gd, aktuell, d);
-		for(int i = gui.size() - 1; i >= 0; i--)
-			gui.get(i).aufzeichnen(gd, d);
-	}
-
 	public static void maus(int xp, int yp)
 	{
 		Clickbar cl = null;
@@ -87,10 +67,15 @@ public class XKarte
 		if(cl != null)
 			cl.onFokus();
 		gui.removeIf(UIAnschluss::weg);
-		int xcal = d.xcal(xp);
-		int ycal = d.ycal(yp);
-		if(xcal >= 0 && ycal >= 0 && xcal < aktuell.xw * d.fwx && ycal < aktuell.yw * d.fwy)
-			mark.mdk(xcal / d.fwx, ycal / d.fwy, aktuell);
+		if(cl == null)
+		{
+			int xcal = d.xcal(xp);
+			int ycal = d.ycal(yp);
+			if(xcal >= 0 && ycal >= 0 && xcal < aktuell.xw * d.fwx && ycal < aktuell.yw * d.fwy)
+				mark.mdk(xcal / d.fwx, ycal / d.fwy, aktuell);
+			else
+				mark.mdk(-1, -1, null);
+		}
 		else
 			mark.mdk(-1, -1, null);
 		aktuell.tick(mark);
@@ -107,6 +92,21 @@ public class XKarte
 						aktuell.begehbar(mark.mitFokus(mark.ziel), mark.fokus.marked) ? 0 : 2).an((KChara) mark.fokus.marked);
 			mark.ziel.existent = false;
 		}
+	}
+
+	public static void aufzeichnen(Graphics2D gd)
+	{
+		for(int xi = -d.sichtx - 1; xi <= d.sichtx + 1; xi++)
+			for(int yi = -d.sichty - 1; yi <= d.sichty + 1; yi++)
+				aktuell.fliese(d.xkm + xi, d.ykm + yi).zeichne(gd,
+						d.xks2 + d.xdfw * xi, d.yks2 + d.ydfw * yi, d.xdfw, d.ydfw);
+		for(KObjekt c : aktuell.objekte)
+			if(c.existent && c.x + 1 >= d.xkm - d.sichtx && c.y + 1 >= d.ykm - d.sichty
+					&& c.x + c.xg - 1 <= d.xkm + d.sichtx && c.y + c.yg - 1 <= d.ykm + d.sichty)
+				c.zeichne(gd, d.xort(c.x, c.sx), d.yort(c.y, c.sy), d.xdfw, d.ydfw);
+		mark.zeichne(gd, aktuell, d);
+		for(int i = gui.size() - 1; i >= 0; i--)
+			gui.get(i).aufzeichnen(gd, d);
 	}
 
 	public static void kamera()

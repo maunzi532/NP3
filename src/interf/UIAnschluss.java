@@ -64,6 +64,14 @@ public class UIAnschluss
 
 	public boolean weg()
 	{
-		return inhalt.weg();
+		int re = inhalt.weg();
+		if(re != 0)
+			code(re);
+		return re > 0;
+	}
+
+	public void code(int re)
+	{
+
 	}
 }

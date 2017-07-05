@@ -19,7 +19,7 @@ public class MenuItem extends Clickbar
 	public void onClick(boolean r)
 	{
 		if(cascade > 0)
-			weg = true;
+			weg = 1;
 	}
 
 	@Override
