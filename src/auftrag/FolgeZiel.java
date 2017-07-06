@@ -16,6 +16,13 @@ public class FolgeZiel extends Auftrag
 		this.abstand = abstand;
 	}
 
+	public FolgeZiel(KObjekt ziel, int abstand, Auftrag danach)
+	{
+		super(danach);
+		this.ziel = ziel;
+		this.abstand = abstand;
+	}
+
 	@Override
 	public Boolean los(boolean bewegt, boolean abbruch)
 	{

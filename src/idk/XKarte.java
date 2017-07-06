@@ -43,7 +43,10 @@ public class XKarte
 		d.calc();
 		maus(xp, yp);
 		mark.verarbeite();
-		if(aktuell != null)
+		if(mark.alleKarten)
+			for(Karte k : karten)
+				k.tick();
+		else if(aktuell != null)
 			aktuell.tick();
 		aufzeichnen(gd);
 		if(aktuell != null)

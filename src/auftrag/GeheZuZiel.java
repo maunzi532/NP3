@@ -13,6 +13,13 @@ public class GeheZuZiel extends Auftrag
 		this.abstand = abstand;
 	}
 
+	public GeheZuZiel(Koordinate ziel, int abstand, Auftrag danach)
+	{
+		super(danach);
+		this.ziel = ziel;
+		this.abstand = abstand;
+	}
+
 	@Override
 	public Boolean los(boolean bewegt, boolean abbruch)
 	{
