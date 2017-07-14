@@ -3,6 +3,7 @@ package z.sweeper;
 import auftrag.*;
 import idk.*;
 import interf.*;
+import java.util.*;
 import karte.*;
 import pfadfind.*;
 
@@ -10,7 +11,7 @@ public class SweeperMark extends Mark
 {
 	public SweeperMark()
 	{
-		Karte k = new SweeperKarte(40, 40);
+		Karte k = new SweeperKarte(10, 10);
 		XKarte.aktuell = k;
 		XKarte.karten.add(k);
 		k.objekte.add(new KChara(0, 0, 2, 2, true, true, k));
@@ -44,8 +45,13 @@ public class SweeperMark extends Mark
 		{
 			if(ziel.marked != null)
 			{
+				/*XKarte.gui.add(new UIAnschluss(XKarte.aktuell, fokus.marked, 1, -1,
+						new MenuItem("Wugutest", false, 2, 3, 1, 1, 1, 3, 1, 1, 1)));*/
+				ArrayList<Exec> execs = new ArrayList<>();
+				execs.add(new Exec("Wugu", e -> XKarte.kamx += 5));
+				execs.add(new Exec("Ende", e -> {}));
 				XKarte.gui.add(new UIAnschluss(XKarte.aktuell, fokus.marked, 1, -1,
-						new MenuItem("Wugutest", false, 2, 3, 1, 1, 1, 3, 1, 1, 1)));
+						new VariableOption(execs, 3, 2, 0, 1, 0, 1, 2, 1, 1, 2)));
 				new FolgeZiel(ziel.marked, 2).an((KChara) fokus.marked);
 			}
 			else

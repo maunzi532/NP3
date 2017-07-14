@@ -27,11 +27,8 @@ public class MultiOption extends UITeil
 	public int weg()
 	{
 		for(int i = 0; i < in.size(); i++)
-		{
-			UITeil in2 = in.get(i);
-			if(in2.weg() > 0)
+			if(in.get(i).weg() > 0)
 				weg = i + 1;
-		}
 		return weg;
 	}
 }
