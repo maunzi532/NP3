@@ -45,14 +45,11 @@ public class SweeperMark extends Mark
 		{
 			if(ziel.marked != null)
 			{
-				/*XKarte.gui.add(new UIAnschluss(XKarte.aktuell, fokus.marked, 1, -1,
-						new MenuItem("Wugutest", false, 2, 3, 1, 1, 1, 3, 1, 1, 1)));*/
 				ArrayList<Exec> execs = new ArrayList<>();
-				execs.add(new Exec("Wugu", e -> XKarte.kamx += 5));
+				execs.add(new Exec("Gehe zu", e -> new FolgeZiel(ziel.marked, 2).an((KChara) fokus.marked)));
 				execs.add(new Exec("Ende", e -> {}));
 				XKarte.gui.add(new UIAnschluss(XKarte.aktuell, fokus.marked, 1, -1,
 						new VariableOption(execs, 3, 2, 0, 1, 0, 1, 2, 1, 1, 2)));
-				new FolgeZiel(ziel.marked, 2).an((KChara) fokus.marked);
 			}
 			else
 				new GeheZuZiel(new Koordinate(ziel.x, ziel.y), XKarte.aktuell.begehbar(mitFokus(ziel), fokus.marked) ? 0 : 2).an((KChara) fokus.marked);

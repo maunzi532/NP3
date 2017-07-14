@@ -3,7 +3,7 @@ package idk;
 import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
-import z.sweeper.*;
+import z.dec.*;
 
 public class Fenster
 {
@@ -16,7 +16,7 @@ public class Fenster
 	public static void main(String[] args)
 	{
 		initFenster();
-		XKarte.mark = new SweeperMark();
+		XKarte.mark = new DecMark();
 		XKarte.init();
 		while(true)
 		{
