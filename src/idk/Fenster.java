@@ -16,8 +16,9 @@ public class Fenster
 	public static void main(String[] args)
 	{
 		initFenster();
+		XKarte.init1();
 		XKarte.mark = new DecMark();
-		XKarte.init();
+		XKarte.init2();
 		while(true)
 		{
 			TA.bereit();

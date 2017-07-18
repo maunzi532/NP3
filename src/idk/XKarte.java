@@ -11,6 +11,7 @@ public class XKarte
 	public static Karte aktuell;
 	public static Mark mark;
 	public static ArrayList<UIAnschluss> gui = new ArrayList<>();
+	public static Texthalter th;
 	public static KObjekt kamLock;
 	public static int kamx, kamy;
 	public static int sichtx, sichty;
@@ -18,7 +19,13 @@ public class XKarte
 	public static final int fwy = 20;
 	public static PlD d;
 
-	public static void init()
+	public static void init1()
+	{
+		th = new Texthalter(0, 1, 0, 1, 1, 1, 1, 1);
+		gui.add(new UIAnschluss(0, 1, th));
+	}
+
+	public static void init2()
 	{
 		if(aktuell != null)
 		{

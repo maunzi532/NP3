@@ -1,20 +1,12 @@
 package interf;
 
 import java.awt.*;
-import java.util.function.*;
 
 public class Textbox extends Clickbar
 {
 	String text;
-	Consumer exec;
 
 	public Textbox(String text, int cascade, int... location)
-	{
-		super(cascade, location);
-		this.text = text;
-	}
-
-	public Textbox(String text, Consumer exec, int cascade, int... location)
 	{
 		super(cascade, location);
 		this.text = text;
@@ -33,7 +25,7 @@ public class Textbox extends Clickbar
 	@Override
 	public Clickbar registerClick2(int xn, int yn, int xr, int yr, int cx, int cy)
 	{
-		if(clickbar && cx >= xn - xr && cy >= yn - yr && cx < xn + xr && cy < yn + yr)
+		if(clickbar)
 			return this;
 		return null;
 	}
@@ -41,8 +33,6 @@ public class Textbox extends Clickbar
 	@Override
 	public void onClick(boolean r)
 	{
-		if(exec != null)
-			exec.accept(null);
 		weg = 1;
 	}
 }
