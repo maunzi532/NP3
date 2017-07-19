@@ -6,9 +6,12 @@ import interf.*;
 import java.util.*;
 import karte.*;
 import pfadfind.*;
+import z.dec.duell.*;
 
 public class DecMark extends Mark
 {
+	public static Duell duell;
+
 	public DecMark()
 	{
 		super();
@@ -22,6 +25,8 @@ public class DecMark extends Mark
 	@Override
 	public void verarbeite()
 	{
+		if(duell != null)
+			duell.tick();
 		if(XKarte.aktuell == null)
 			return;
 		if(fokus.existent && fokus.marked != null && ziel.existent)

@@ -5,12 +5,16 @@ import interf.*;
 import java.util.*;
 import karte.*;
 import pfadfind.*;
+import z.dec.duell.*;
 
 public class DecChara extends KChara
 {
+	S4I s4i;
+
 	public DecChara(int x, int y, int xg, int yg, boolean sichtbar, boolean solide, Karte auf)
 	{
 		super(x, y, xg, yg, sichtbar, solide, auf);
+		s4i = new S4I(0, 0, 0, 1, 0, 0, 0);
 	}
 
 	public ArrayList<Exec> execs(DecChara fuer)
@@ -27,6 +31,9 @@ public class DecChara extends KChara
 
 	public void gibmirduell(DecChara mir)
 	{
-		XKarte.th.addText("Noch nicht implementiert");
+		if(DecMark.duell == null)
+			DecMark.duell = new Duell(mir, this, true);
+		else
+			XKarte.th.addText("Nicht möglich");
 	}
 }

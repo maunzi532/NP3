@@ -6,9 +6,9 @@ public class Textbox extends Clickbar
 {
 	String text;
 
-	public Textbox(String text, int cascade, int... location)
+	public Textbox(String text, int... location)
 	{
-		super(cascade, location);
+		super(0, location);
 		this.text = text;
 	}
 

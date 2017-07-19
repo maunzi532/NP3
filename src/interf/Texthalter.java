@@ -11,7 +11,7 @@ public class Texthalter extends UITeil
 
 	public void addText(String text)
 	{
-		in.add(new Textbox(text, 0, 0, 1, 0, 1, 1, 1, 1, 3));
+		in.add(new Textbox(text, 0, 1, 0, 1, 1, 1, 1, 3));
 	}
 
 	public void aufzeichnen(Graphics2D gd, int... bloc)
