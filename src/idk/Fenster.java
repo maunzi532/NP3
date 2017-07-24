@@ -3,7 +3,7 @@ package idk;
 import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
-import z.dec.*;
+import z.np.*;
 
 public class Fenster
 {
@@ -17,7 +17,7 @@ public class Fenster
 	{
 		initFenster();
 		XKarte.init1();
-		XKarte.mark = new DecMark();
+		XKarte.mark = new NPMark();
 		XKarte.init2();
 		while(true)
 		{

@@ -1,6 +1,5 @@
 package z.np;
 
-import java.util.*;
 import karte.*;
 import pfadfind.*;
 
@@ -11,17 +10,42 @@ public class NPChara extends KChara implements Einheit
 	Haus inHaus;
 
 	long energie;
-	long maxEnergie;
+	long energieLimit;
 
 	long leben;
-	long maxLeben;
+	long lebenLimit;
 
-	long[] align;
+	/*long[] align;
 
-	ArrayList<long[]> effects;
+	ArrayList<long[]> effects;*/
 
 	public NPChara(int x, int y, int xg, int yg, boolean sichtbar, boolean solide, Karte auf)
 	{
 		super(x, y, xg, yg, sichtbar, solide, auf);
+	}
+
+	public long leben()
+	{
+		return leben;
+	}
+
+	public long lebenLimit()
+	{
+		return lebenLimit;
+	}
+
+	public long energie()
+	{
+		return energie;
+	}
+
+	public long energieLimit()
+	{
+		return energieLimit;
+	}
+
+	public long energieMaxTransfer()
+	{
+		return energieLimit / 10;
 	}
 }

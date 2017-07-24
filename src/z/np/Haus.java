@@ -6,6 +6,7 @@ import pfadfind.*;
 
 public class Haus extends KChara implements Einheit
 {
+	Bauplan plan;
 	HashMap<InnenTeilTyp, InnenTeil> innen = new HashMap<>();
 
 	ArrayList<LinkKabel> rein = new ArrayList<>();
