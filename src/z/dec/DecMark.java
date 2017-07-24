@@ -10,7 +10,7 @@ import z.dec.duell.*;
 
 public class DecMark extends Mark
 {
-	public static Duell duell;
+	public static Backend duell;
 
 	public DecMark()
 	{

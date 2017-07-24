@@ -32,7 +32,7 @@ public class DecChara extends KChara
 	public void gibmirduell(DecChara mir)
 	{
 		if(DecMark.duell == null)
-			DecMark.duell = new Duell(mir, this, true);
+			DecMark.duell = new Backend(mir, this, true);
 		else
 			XKarte.th.addText("Nicht möglich");
 	}
