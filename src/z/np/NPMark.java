@@ -48,7 +48,10 @@ public class NPMark extends Mark
 					//Hineingehen
 					NPChara c = (NPChara) fokus.marked;
 					Haus h = (Haus) ziel.marked;
-					c.auf.objekte.remove(c);
+					if(h.innenRaum().voll())
+						XKarte.gui.add(new UIAnschluss(h.auf, h, 1, -1, new InfoTimed("Haus voll", false, 100, 2, 2, 1, 1, 2, 2, 1, 1, 2)));
+					else
+						new FolgeZiel(h, 2, new BetreteZiel(h)).an(c);
 				}
 				else if(ziel.marked instanceof NPChara)
 				{
