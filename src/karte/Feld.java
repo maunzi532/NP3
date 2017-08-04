@@ -7,6 +7,16 @@ import java.io.*;
 
 public abstract class Feld
 {
+	public int x, y;
+
+	public Feld(){}
+
+	public Feld(int x, int y)
+	{
+		this.x = x;
+		this.y = y;
+	}
+
 	public abstract boolean begehbar(KObjekt wer);
 
 	public abstract Color farbe();

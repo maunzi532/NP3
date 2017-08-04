@@ -8,6 +8,13 @@ public class Bodenteil extends Feld
 {
 	FluidG fluidG;
 
+	public Bodenteil(){}
+
+	public Bodenteil(int x, int y)
+	{
+		super(x, y);
+	}
+
 	public void tick()
 	{
 		if(fluidG != null)

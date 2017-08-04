@@ -16,8 +16,7 @@ public class SweeperFeld extends Feld
 
 	public SweeperFeld(int x, int y, SweeperKarte sk, int type)
 	{
-		this.x = x;
-		this.y = y;
+		super(x, y);
 		this.sk = sk;
 		this.type = type;
 		state = -1;
