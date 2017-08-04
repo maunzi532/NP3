@@ -3,7 +3,9 @@ package idk;
 import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
+import z.dec.*;
 import z.np.*;
+import z.sweeper.*;
 
 public class Fenster
 {
@@ -15,9 +17,22 @@ public class Fenster
 
 	public static void main(String[] args)
 	{
+		if(args.length < 1)
+			return;
 		initFenster();
 		XKarte.init1();
-		XKarte.mark = new NPMark();
+		switch(args[0])
+		{
+			case "Sweeper":
+				XKarte.mark = new SweeperMark();
+				break;
+			case "Dec":
+				XKarte.mark = new DecMark();
+				break;
+			case "NP":
+				XKarte.mark = new NPMark();
+				break;
+		}
 		XKarte.init2();
 		while(true)
 		{

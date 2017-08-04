@@ -1,8 +1,9 @@
-package z.np;
+package z.np.haus;
 
 import java.util.*;
 import karte.*;
 import pfadfind.*;
+import z.np.*;
 
 public class Haus extends KChara implements Einheit
 {
@@ -21,7 +22,7 @@ public class Haus extends KChara implements Einheit
 	public Haus(int x, int y, int xg, int yg, boolean sichtbar, boolean solide, Karte auf)
 	{
 		super(x, y, xg, yg, sichtbar, solide, auf);
-		innen.put(InnenTeilTyp.RAUM, new InnenRaum(this, 10, 1));
+		innen.put(InnenTeilTyp.RAUM, new InnenRaum(this, 10));
 	}
 
 	public InnenRaum innenRaum()

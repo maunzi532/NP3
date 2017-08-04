@@ -84,10 +84,13 @@ public class XKarte
 				for(int yi = -d.sichty - 1; yi <= d.sichty + 1; yi++)
 					aktuell.fliese(d.xkm + xi, d.ykm + yi).zeichne(gd,
 							d.xks2 + d.xdfw * xi, d.yks2 + d.ydfw * yi, d.xdfw, d.ydfw);
-			for(KObjekt c : aktuell.objekte)
+			for(int i = 0; i < aktuell.objekte.size(); i++)
+			{
+				KObjekt c = (KObjekt) aktuell.objekte.get(i);
 				if(c.existent && c.x + 1 >= d.xkm - d.sichtx && c.y + 1 >= d.ykm - d.sichty
 						&& c.x + c.xg - 1 <= d.xkm + d.sichtx && c.y + c.yg - 1 <= d.ykm + d.sichty)
 					c.zeichne(gd, d.xort(c.x, c.sx), d.yort(c.y, c.sy), d.xdfw, d.ydfw);
+			}
 			mark.zeichne(gd, aktuell, d);
 		}
 		else

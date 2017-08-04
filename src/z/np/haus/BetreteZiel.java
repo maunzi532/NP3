@@ -1,6 +1,7 @@
-package z.np;
+package z.np.haus;
 
 import auftrag.*;
+import z.np.*;
 
 public class BetreteZiel extends Auftrag
 {
@@ -25,7 +26,7 @@ public class BetreteZiel extends Auftrag
 			if(!ziel.existent || chara.abstand(ziel) > 2)
 				return false;
 			NPChara c = (NPChara) chara;
-			c.auf.objekte.remove(c);
+			c.auf.chg.add(c);
 			ziel.innenRaum().charas.add(c);
 		}
 		return null;

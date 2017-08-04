@@ -3,32 +3,34 @@ package karte;
 import idk.*;
 import java.util.*;
 
-public abstract class Karte
+public abstract class Karte<T extends Feld>
 {
 	public int xw;
 	public int yw;
-	public Feld[][] fliesen;
 	public ArrayList<KObjekt> objekte = new ArrayList<>();
+	public ArrayList<KObjekt> chg = new ArrayList<>();
+	public T[][] fliesen;
 
 	public Karte(int xw, int yw)
 	{
 		this.xw = xw;
 		this.yw = yw;
-		fliesen = new Feld[xw][yw];
 	}
 
-	public Feld fliese(int x, int y)
+	public T fliese(int x, int y)
 	{
 		if(x < 0 || y < 0 || x >= xw || y >= yw)
-			return Feld.LEERE;
+			return ausserhalb();
 		return fliesen[x][y];
 	}
+
+	public abstract T ausserhalb();
 
 	public boolean begehbar(KOrt z, KObjekt wer)
 	{
 		for(int xi = 0; xi < z.xg; xi++)
 			for(int yi = 0; yi < z.yg; yi++)
-				if(!fliese(z.x + xi, z.y + yi).begehbar())
+				if(!fliese(z.x + xi, z.y + yi).begehbar(wer))
 					return false;
 		for(KObjekt k : objekte)
 			if(k.existent && k.solide && k != wer && overlap(z, k))
@@ -54,16 +56,20 @@ public abstract class Karte
 	{
 		for(KObjekt k : objekte)
 			k.tick();
+		for(KObjekt k : chg)
+			if(!objekte.remove(k))
+				objekte.add(k);
+		chg.clear();
 	}
 
-	public boolean[][] bewK(int xg, int yg, KObjekt ausnahme)
+	public boolean[][] bewK(int xg, int yg, KObjekt wer)
 	{
 		boolean[][] re = new boolean[xw][yw];
 		for(int ix = 0; ix < xw; ix++)
 			for(int iy = 0; iy < yw; iy++)
-				re[ix][iy] = fliesen[ix][iy].begehbar();
+				re[ix][iy] = fliesen[ix][iy].begehbar(wer);
 		for(KObjekt k : objekte)
-			if(k.existent && k.solide && k != ausnahme)
+			if(k.existent && k.solide && k != wer)
 				for(int igx = 0; igx < k.xg; igx++)
 					for(int igy = 0; igy < k.yg; igy++)
 						re[k.x + igx][k.y + igy] = false;

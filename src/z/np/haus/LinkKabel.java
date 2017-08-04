@@ -1,4 +1,6 @@
-package z.np;
+package z.np.haus;
+
+import z.np.*;
 
 public class LinkKabel
 {

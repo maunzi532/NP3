@@ -23,6 +23,11 @@ public class SweeperFeld extends Feld
 		state = -1;
 	}
 
+	public SweeperFeld()
+	{
+		state = -3;
+	}
+
 	@Override
 	public void zeichne(Graphics2D gd, int x, int y, int w, int h)
 	{
@@ -72,7 +77,7 @@ public class SweeperFeld extends Feld
 	}
 
 	@Override
-	public boolean begehbar()
+	public boolean begehbar(KObjekt wer)
 	{
 		return state >= 0;
 	}
@@ -86,6 +91,8 @@ public class SweeperFeld extends Feld
 				return Color.DARK_GRAY;
 			case -2:
 				return Color.RED;
+			case -3:
+				return Color.BLACK;
 			default:
 				return Color.LIGHT_GRAY;
 		}

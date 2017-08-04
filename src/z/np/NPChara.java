@@ -2,6 +2,7 @@ package z.np;
 
 import karte.*;
 import pfadfind.*;
+import z.np.haus.*;
 
 public class NPChara extends KChara implements Einheit
 {

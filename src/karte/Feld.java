@@ -7,7 +7,7 @@ import java.io.*;
 
 public abstract class Feld
 {
-	public abstract boolean begehbar();
+	public abstract boolean begehbar(KObjekt wer);
 
 	public abstract Color farbe();
 
@@ -32,7 +32,7 @@ public abstract class Feld
 	public static Feld LEERE = new Feld()
 	{
 		@Override
-		public boolean begehbar()
+		public boolean begehbar(KObjekt wer)
 		{
 			return false;
 		}
@@ -53,7 +53,7 @@ public abstract class Feld
 	public static Feld NFELD = new Feld()
 	{
 		@Override
-		public boolean begehbar()
+		public boolean begehbar(KObjekt wer)
 		{
 			return true;
 		}

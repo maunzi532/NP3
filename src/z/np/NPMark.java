@@ -5,9 +5,14 @@ import idk.*;
 import interf.*;
 import karte.*;
 import pfadfind.*;
+import z.np.boden.*;
+import z.np.haus.*;
 
 public class NPMark extends Mark
 {
+	private static final int dticks = 10;
+	private int dtick = 10;
+
 	public NPMark()
 	{
 		Karte k = new NPKarte(10, 10);
@@ -24,62 +29,69 @@ public class NPMark extends Mark
 	{
 		if(XKarte.aktuell == null)
 			return;
-		/*if(fokus.existent && fokus.marked != null && ziel.existent)
+		if(!ziel.existent)
+			dtick = dticks;
+		else
 		{
-			if(ziel.marked != null)
+			if(dtick > 0)
+				dtick--;
+			if(dtick <= 0)
 			{
-				XKarte.gui.add(new UIAnschluss(XKarte.aktuell, fokus.marked, 1, -1,
-						new MenuItem("Wugutest", false, 2, 3, 1, 1, 1, 3, 1, 1, 1)));
-				new FolgeZiel(ziel.marked, 2).an((KChara) fokus.marked);
+				if(fokus.existent)
+					verarbeite2();
+				ziel.existent = false;
 			}
-			else
-				new GeheZuZiel(new Koordinate(ziel.x, ziel.y), XKarte.aktuell.begehbar(mitFokus(ziel), fokus.marked) ? 0 : 2).an((KChara) fokus.marked);
-			ziel.existent = false;
+		}
+	}
+
+	public void verarbeite2()
+	{
+		if(fokus.marked instanceof NPChara)
+		{
+			NPChara c = (NPChara) fokus.marked;
+			if(ziel.marked == c)
+				//Info
+				XKarte.gui.add(new UIAnschluss(c.auf, c, 1, -1,
+						new InfoTimed("NPChara", false, 100, 2, 2, 1, 1, 2, 2, 1, 1, 2)));
+			else if(ziel.marked instanceof Haus)
+			{
+				//Hineingehen
+				Haus h = (Haus) ziel.marked;
+				if(h.innenRaum().voll())
+					XKarte.gui.add(new UIAnschluss(h.auf, h, 1, -1,
+							new InfoTimed("Haus voll", false, 100, 2, 2, 1, 1, 2, 2, 1, 1, 2)));
+				else
+					new FolgeZiel(h, 2, new BetreteZiel(h)).an(c);
+			}
+			else if(ziel.marked instanceof NPChara)
+			{
+				//Items tauschen
+				//Fähigkeit einsetzen
+				new FolgeZiel(ziel.marked, 2).an(c);
+			}
+			else if(ziel.marked == null && XKarte.aktuell.begehbar(mitFokus(ziel), fokus.marked))
+				new GeheZuZiel(new Koordinate(ziel.x, ziel.y), 0).an((KChara) fokus.marked);
+		}
+		if(fokus.marked instanceof Haus)
+		{
+			Haus h = (Haus) fokus.marked;
+			if(ziel.marked == h)
+				//Info
+				/*XKarte.gui.add(new UIAnschluss(h.auf, h, 1, -1,
+						new InfoTimed("Haus", false, 100, 2, 2, 1, 1, 2, 2, 1, 1, 2)));*/
+				XKarte.gui.add(new UIAnschluss(0, 0, new HausGUI(h)));
+			else if(ziel.marked instanceof Haus)
+			{
+				//Kabel verlegen
+			}
+		/*else if(ziel.marked instanceof NPChara)
+		{
+			//Energiestrahlen?
+		}
+		else if(ziel.marked == null)
+		{
+			//Fahren
 		}*/
-		if(fokus.existent && ziel.existent)
-		{
-			if(fokus.marked instanceof NPChara)
-			{
-				if(ziel.marked == fokus.marked)
-					//Info
-					XKarte.gui.add(new UIAnschluss(0, 0, new MenuItem("NPChara", false, 2, 0, 1, 0, 1, 1, 4, 1, 12)));
-				else if(ziel.marked instanceof Haus)
-				{
-					//Hineingehen
-					NPChara c = (NPChara) fokus.marked;
-					Haus h = (Haus) ziel.marked;
-					if(h.innenRaum().voll())
-						XKarte.gui.add(new UIAnschluss(h.auf, h, 1, -1, new InfoTimed("Haus voll", false, 100, 2, 2, 1, 1, 2, 2, 1, 1, 2)));
-					else
-						new FolgeZiel(h, 2, new BetreteZiel(h)).an(c);
-				}
-				else if(ziel.marked instanceof NPChara)
-				{
-					//Items tauschen
-					//Fähigkeit einsetzen
-				}
-				else if(ziel.marked == null && XKarte.aktuell.begehbar(mitFokus(ziel), fokus.marked))
-					new GeheZuZiel(new Koordinate(ziel.x, ziel.y), 0).an((KChara) fokus.marked);
-			}
-			if(fokus.marked instanceof Haus)
-			{
-				if(ziel.marked == fokus.marked)
-					//Info
-					XKarte.gui.add(new UIAnschluss(0, 0, new MenuItem("Haus", false, 2, 0, 1, 0, 1, 1, 4, 1, 12)));
-				else if(ziel.marked instanceof Haus)
-				{
-					//Kabel verlegen
-				}
-				/*else if(ziel.marked instanceof NPChara)
-				{
-					//Energiestrahlen?
-				}
-				else if(ziel.marked == null)
-				{
-					//Fahren
-				}*/
-			}
-			ziel.existent = false;
 		}
 	}
 }
