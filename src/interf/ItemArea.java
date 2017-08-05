@@ -64,9 +64,9 @@ public class ItemArea<T> extends Clickbar
 	@Override
 	public void onScroll(int n)
 	{
-		if(n > 0 && tscroll < maxscroll)
+		if(n < 0 && tscroll < maxscroll)
 			tscroll++;
-		if(n < 0 && tscroll > 0)
+		if(n > 0 && tscroll > 0)
 			tscroll--;
 	}
 

@@ -37,7 +37,7 @@ public class Texthalter extends UITeil
 			if(cl != null)
 				return cl;
 		}
-		return registerClick2(xn, yn, xr2, yr2, cx, cy);
+		return registerClick2(cx, cy, xn, yn, xr2, yr2);
 	}
 
 	public int weg()

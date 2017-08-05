@@ -12,7 +12,7 @@ public abstract class Clickbar extends UITeil
 		clickbar = true;
 	}
 
-	public Clickbar registerClick2(int xn, int yn, int xr, int yr, int cx, int cy)
+	public Clickbar registerClick2(int cx, int cy, int xn, int yn, int xr, int yr)
 	{
 		if(clickbar && cx >= xn - xr && cy >= yn - yr && cx < xn + xr && cy < yn + yr)
 			return this;

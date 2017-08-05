@@ -7,9 +7,9 @@ public class DeadArea extends Clickbar
 	Color bg;
 	Color ra;
 
-	public DeadArea(Color bg, Color ra, int cascade, int... location)
+	public DeadArea(Color bg, Color ra)
 	{
-		super(cascade, location);
+		super(2, 0, 1, 0, 1, 1, 1, 1, 1);
 		this.bg = bg;
 		this.ra = ra;
 	}

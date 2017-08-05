@@ -48,10 +48,10 @@ public class UITeil
 			if(cl != null)
 				return cl;
 		}
-		return registerClick2(xn, yn, xr2, yr2, cx, cy);
+		return registerClick2(cx, cy, xn, yn, xr2, yr2);
 	}
 
-	public Clickbar registerClick2(int xn, int yn, int xr, int yr, int cx, int cy)
+	public Clickbar registerClick2(int cx, int cy, int xn, int yn, int xr, int yr)
 	{
 		return null;
 	}
