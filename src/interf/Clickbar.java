@@ -21,11 +21,19 @@ public abstract class Clickbar extends UITeil
 
 	public void onFokus()
 	{
-		if(TA.take[201] == 2)
-			onClick(false);
+		if(TA.take[202] == 2)
+			onClick(2);
+		else if(TA.take[201] == 2)
+			onClick(1);
 		else if(TA.take[203] == 2)
-			onClick(true);
+			onClick(3);
+		if(TA.take[210] > 0)
+			onScroll(-1);
+		else if(TA.take[211] > 0)
+			onScroll(1);
 	}
 
-	public abstract void onClick(boolean r);
+	public abstract void onClick(int n);
+
+	public void onScroll(int n){}
 }

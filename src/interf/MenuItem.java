@@ -16,7 +16,7 @@ public class MenuItem extends Clickbar
 	}
 
 	@Override
-	public void onClick(boolean r)
+	public void onClick(int n)
 	{
 		if(cascade > 0)
 			weg = 1;

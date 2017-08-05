@@ -33,7 +33,7 @@ public class DeinController implements Controller
 				XKarte.gui.add(new UIAnschluss(1, 1, new MenuItem("Fertig", true, 2, -1, 6, -1, 6, 1, 6, 1, 6)
 				{
 					@Override
-					public void onClick(boolean r)
+					public void onClick(int n)
 					{
 						int index = backend.team1.indexOf(XKarte.mark.fokus.marked);
 						if(index >= 0)

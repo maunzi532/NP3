@@ -30,7 +30,7 @@ public class Bodenteil extends Feld
 	@Override
 	public Color farbe()
 	{
-		return null;
+		return new Color(50, 50, 0);
 	}
 
 	@Override

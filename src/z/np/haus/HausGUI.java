@@ -1,6 +1,7 @@
 package z.np.haus;
 
 import interf.*;
+import java.awt.*;
 
 public class HausGUI extends Clickbar
 {
@@ -10,11 +11,12 @@ public class HausGUI extends Clickbar
 	{
 		super(0, 0, 1, 0, 1, 1, 1, 1, 1);
 		this.h = h;
-		in.add(new ItemArea<>(h.innenRaum().charas, e -> new MenuItem(e.toString(), true, 0), 4, 5, 0, 0, 1, 0, 1, 1, 3, 1, 2));
+		in.add(new DeadArea(Color.GRAY, Color.BLACK, 0, 0, 1, 0, 1, 1, 2, 2, 3));
+		in.add(new ItemArea<>(h.innenRaum().charas, e -> e.visual, 2, 5, 0, 0, 1, 0, 1, 1, 3, 1, 2));
 	}
 
 	@Override
-	public void onClick(boolean r)
+	public void onClick(int n)
 	{
 		weg = 1;
 	}

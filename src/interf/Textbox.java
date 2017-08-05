@@ -31,7 +31,7 @@ public class Textbox extends Clickbar
 	}
 
 	@Override
-	public void onClick(boolean r)
+	public void onClick(int n)
 	{
 		weg = 1;
 	}

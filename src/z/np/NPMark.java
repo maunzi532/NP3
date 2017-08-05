@@ -19,8 +19,10 @@ public class NPMark extends Mark
 		XKarte.aktuell = k;
 		XKarte.karten.add(k);
 		k.objekte.add(new Haus(0, 0, 2, 2, true, true, k));
-		k.objekte.add(new NPChara(2, 2, 1, 1, true, true, k));
-		k.objekte.add(new NPChara(0, 2, 1, 1, true, true, k));
+		for(int i = 0; i < k.xw; i++)
+			k.objekte.add(new NPChara(i, 2, 1, 1, true, true, k));
+		for(int i = 0; i < k.xw; i++)
+			k.objekte.add(new NPChara(i, 3, 1, 1, true, true, k));
 		alleKarten = true;
 	}
 

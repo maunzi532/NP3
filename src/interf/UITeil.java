@@ -17,6 +17,12 @@ public class UITeil
 		this.location = location;
 	}
 
+	public UITeil()
+	{
+		cascade = 0;
+		location = new int[]{0, 1, 0, 1, 1, 1, 1, 1};
+	}
+
 	public void aufzeichnen(Graphics2D gd, int... bloc)
 	{
 		int xn = bloc[0] + bloc[2] * location[0] / location[1];
@@ -36,9 +42,9 @@ public class UITeil
 		int yn = bloc[1] + bloc[3] * location[2] / location[3];
 		int xr2 = bloc[2] * location[4] / location[5];
 		int yr2 = bloc[3] * location[6] / location[7];
-		for(UITeil t : in)
+		for(int i = in.size() - 1; i >= 0; i--)
 		{
-			Clickbar cl = t.registerClick(cx, cy, xn, yn, xr2, yr2);
+			Clickbar cl = in.get(i).registerClick(cx, cy, xn, yn, xr2, yr2);
 			if(cl != null)
 				return cl;
 		}

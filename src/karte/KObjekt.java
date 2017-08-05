@@ -1,6 +1,7 @@
 package karte;
 
 import idk.*;
+import interf.*;
 import java.awt.*;
 
 public class KObjekt extends KOrt
@@ -10,6 +11,7 @@ public class KObjekt extends KOrt
 	public boolean solide;
 	public boolean anzielbar;
 	public Karte auf;
+	public UITeil visual;
 
 	public KObjekt(int x, int y, int xg, int yg, boolean existent, boolean solide, Karte auf)
 	{
@@ -17,6 +19,7 @@ public class KObjekt extends KOrt
 		this.existent = existent;
 		this.solide = solide;
 		this.auf = auf;
+		visual = new KVis(xg, yg);
 	}
 
 	public int abstand(KObjekt k)
@@ -53,7 +56,12 @@ public class KObjekt extends KOrt
 
 	public void zeichne(Graphics2D gd, int x, int y, int w, int h)
 	{
-		gd.setColor(Color.GREEN);
-		gd.fillRect(x - w / 2 + 2, y - h / 2 + 2, w * xg - 4, h * xg - 4);
+		if(visual != null)
+			visual.aufzeichnen(gd, x, y, w / 2, h / 2);
+		else
+		{
+			gd.setColor(Color.GREEN);
+			gd.fillRect(x - w / 2 + 2, y - h / 2 + 2, w * xg - 4, h * yg - 4);
+		}
 	}
 }
