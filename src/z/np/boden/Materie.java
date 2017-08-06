@@ -1,34 +1,30 @@
 package z.np.boden;
 
-public enum Materie
+public class Materie
 {
-	ERDE1(4, 8, 20, 1),
-	STEIN(8, 16, 20, 2),
-	LAVA(16, 18, 8),
-	WASSER(16, 10, 1),
-	GSL(8, 8, 3);
+	public final MaterieTyp typ;
+	public final long menge;
 
-	final boolean fluid;
-	final int tpb;
-	final int invspc;
-	final int tiefe;
-	final int temp;
-
-	Materie(int tpb, int invspc, int tiefe, int temp)
+	public Materie(MaterieTyp typ, long menge)
 	{
-		fluid = false;
-		this.tpb = tpb;
-		this.invspc = invspc;
-		this.tiefe = tiefe;
-		this.temp = temp;
+		this.typ = typ;
+		this.menge = menge;
 	}
 
-	Materie(int invspc, int tiefe, int temp)
+	@Override
+	public boolean equals(Object o)
 	{
-		fluid = true;
-		this.tpb = 0;
-		this.invspc = invspc;
-		this.tiefe = tiefe;
-		this.temp = temp;
+		if(this == o) return true;
+		if(!(o instanceof Materie)) return false;
+
+		Materie materie = (Materie) o;
+
+		return typ == materie.typ;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return typ.hashCode();
 	}
 }

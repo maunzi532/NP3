@@ -1,8 +1,6 @@
 package z.dec;
 
 import idk.*;
-import interf.*;
-import java.util.*;
 import karte.*;
 import pfadfind.*;
 import z.dec.duell.*;
@@ -17,12 +15,12 @@ public class DecChara extends KChara
 		s4i = new S4I(0, 0, 0, 1, 0, 0, 0);
 	}
 
-	public ArrayList<Exec> execs(DecChara fuer)
+	/*public ArrayList<Exec> execs(DecChara fuer)
 	{
 		ArrayList<Exec> execs = new ArrayList<>();
 		execs.add(new Exec("Ende", e -> {}));
 		return execs;
-	}
+	}*/
 
 	public void gibmirtext(DecChara mir)
 	{

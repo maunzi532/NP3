@@ -45,9 +45,9 @@ public class SweeperMark extends Mark
 		{
 			if(ziel.marked != null)
 			{
-				ArrayList<Exec> execs = new ArrayList<>();
-				execs.add(new Exec("Gehe zu", e -> new FolgeZiel(ziel.marked, 2).an((KChara) fokus.marked)));
-				execs.add(new Exec("Ende", e -> {}));
+				ArrayList<Exec<KChara>> execs = new ArrayList<>();
+				execs.add(new Exec<>("Gehe zu", e -> new FolgeZiel(ziel.marked, 2).an(e), (KChara) fokus.marked));
+				execs.add(new Exec<>("Ende", e -> {}, (KChara) fokus.marked));
 				XKarte.gui.add(new UIAnschluss(XKarte.aktuell, fokus.marked, 1, -1,
 						new VariableOption(execs, 3, 2, 0, 1, 0, 1, 2, 1, 1, 2)));
 			}

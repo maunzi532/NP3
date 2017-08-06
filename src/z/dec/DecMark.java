@@ -37,10 +37,10 @@ public class DecMark extends Mark
 				{
 					DecChara act1 = (DecChara) fokus.marked;
 					DecChara act2 = (DecChara) ziel.marked;
-					ArrayList<Exec> execs = new ArrayList<>();
-					execs.add(new Exec("Labern", e -> act2.gibmirtext(act1)));
-					execs.add(new Exec("Duell", e -> act2.gibmirduell(act1)));
-					execs.add(new Exec("Ende", e -> {}));
+					ArrayList<Exec<DecChara>> execs = new ArrayList<>();
+					execs.add(new Exec<>("Labern", e -> e.gibmirtext(act1), act2));
+					execs.add(new Exec<>("Duell", e -> e.gibmirduell(act1), act2));
+					execs.add(new Exec<>("Ende", e -> {}, act2));
 					new FolgeZiel(ziel.marked, 2, new Nachfrage(ziel.marked, execs)).an((KChara) fokus.marked);
 				}
 				else

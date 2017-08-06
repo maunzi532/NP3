@@ -2,13 +2,14 @@ package z.np.boden;
 
 import java.util.*;
 import java.util.stream.*;
+import z.np.*;
 
-public class FluidG
+public class FluidG implements Transferer
 {
 	ArrayList<Bodenteil> teile;
-	HashMap<Materie, Integer> inhalt;
-	public int solidMenge;
-	public int fluidMenge;
+	HashMap<MaterieTyp, Long> inhalt;
+	public long solidMenge;
+	public long fluidMenge;
 	public FluidG replace;
 
 	public FluidG()
@@ -24,40 +25,66 @@ public class FluidG
 		return replace.replace();
 	}
 
-	public int kapazitaet()
+	public long kapazitaet()
 	{
 		return teile.size() * 16;
 	}
 
-	public int menge()
+	public long menge()
 	{
 		return solidMenge + fluidMenge;
 	}
 
 	public int tiefe()
 	{
-		return fluidMenge / teile.size();
+		return (int) (fluidMenge / teile.size());
 	}
 
-	public void rein(Fluid rein)
+	@Override
+	public boolean requestMaterie(Materie mat, boolean real)
 	{
-		if(rein.menge <= 0 || menge() >= kapazitaet())
-			return;
-		int abzug = rein.menge;
+		if(inhalt.containsKey(mat.typ) && inhalt.get(mat.typ) >= mat.menge)
+		{
+			long danach = inhalt.get(mat.typ) - mat.menge;
+			if(real)
+			{
+				if(danach <= 0)
+					inhalt.remove(mat.typ);
+				else
+					inhalt.put(mat.typ, danach);
+				if(mat.typ.fluid)
+					fluidMenge -= mat.menge;
+				else
+					solidMenge -= mat.menge;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Materie acceptMaterie(Materie mat, boolean real)
+	{
+		if(mat.menge <= 0 || menge() >= kapazitaet())
+			return mat;
+		long abzug = mat.menge;
 		if(menge() + abzug > kapazitaet())
 			abzug = kapazitaet() - menge();
-		rein.menge -= abzug;
-		if(inhalt.containsKey(rein.mat))
-			inhalt.put(rein.mat, inhalt.get(rein.mat) + abzug);
-		else
-			inhalt.put(rein.mat, abzug);
-		if(rein.mat.fluid)
-			fluidMenge += abzug;
-		else
-			solidMenge += abzug;
+		if(real)
+		{
+			if(inhalt.containsKey(mat.typ))
+				inhalt.put(mat.typ, inhalt.get(mat.typ) + abzug);
+			else
+				inhalt.put(mat.typ, abzug);
+			if(mat.typ.fluid)
+				fluidMenge += abzug;
+			else
+				solidMenge += abzug;
+		}
+		return new Materie(mat.typ, mat.menge - abzug);
 	}
 
-	public List<Materie> sortiert()
+	public List<MaterieTyp> sortiert()
 	{
 		return inhalt.keySet().stream().sorted().collect(Collectors.toList());
 	}
@@ -70,7 +97,7 @@ public class FluidG
 		neu.teile.addAll(teile);
 		neu.teile.addAll(a.teile);
 		neu.inhalt.putAll(inhalt);
-		a.inhalt.forEach((mat, m) -> neu.inhalt.merge(mat, m, Integer::sum));
+		a.inhalt.forEach((mat, m) -> neu.inhalt.merge(mat, m, Long::sum));
 		return neu;
 	}
 }

@@ -1,52 +1,89 @@
 package z.np;
 
+import java.util.*;
 import karte.*;
 import pfadfind.*;
+import z.np.boden.*;
 import z.np.haus.*;
 
-public class NPChara extends KChara implements Einheit
+public class NPChara extends KChara implements Transferer
 {
 	NTyp typ;
 
 	Haus inHaus;
 
-	long energie;
-	long energieLimit;
-
 	long leben;
 	long lebenLimit;
 
-	/*long[] align;
+	long energie;
+	long maxenergie;
 
-	ArrayList<long[]> effects;*/
+	Materie therm;
+	long maxmaterie;
+
+	ArrayList<Item> items = new ArrayList<>();
+	int itemlimit;
 
 	public NPChara(int x, int y, int xg, int yg, boolean sichtbar, boolean solide, Karte auf)
 	{
 		super(x, y, xg, yg, sichtbar, solide, auf);
 	}
 
-	public long leben()
+	@Override
+	public boolean requestEnergie(long menge, boolean real)
 	{
-		return leben;
+		if(energie < menge)
+			return false;
+		if(real)
+			energie -= menge;
+		return true;
 	}
 
-	public long lebenLimit()
+	@Override
+	public long acceptEnergie(long menge, boolean real)
 	{
-		return lebenLimit;
+		long abzug = Math.min(menge, maxenergie - energie);
+		if(real)
+			energie += abzug;
+		return menge - abzug;
 	}
 
-	public long energie()
+	@Override
+	public boolean requestMaterie(Materie mat, boolean real)
 	{
-		return energie;
+		if(therm == null || therm.typ != mat.typ || therm.menge < mat.menge)
+			return false;
+		if(real)
+			therm = new Materie(mat.typ, therm.menge - mat.menge);
+		return true;
 	}
 
-	public long energieLimit()
+	@Override
+	public Materie acceptMaterie(Materie mat, boolean real)
 	{
-		return energieLimit;
+		if(therm == null)
+		{
+			if(real)
+				therm = new Materie(mat.typ, Math.min(mat.menge, maxmaterie));
+			return new Materie(mat.typ, Math.max(0, mat.menge - maxmaterie));
+		}
+		if(therm.typ == mat.typ)
+		{
+			long abzug = Math.min(mat.menge, maxmaterie - therm.menge);
+			if(real)
+				therm = new Materie(mat.typ, therm.menge + abzug);
+			return new Materie(mat.typ, mat.menge - abzug);
+		}
+		return mat;
 	}
 
-	public long energieMaxTransfer()
+	@Override
+	public boolean acceptItem(Item item, boolean real)
 	{
-		return energieLimit / 10;
+		if(items.size() >= itemlimit)
+			return false;
+		if(real)
+			items.add(item);
+		return true;
 	}
 }

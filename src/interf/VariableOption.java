@@ -2,11 +2,11 @@ package interf;
 
 import java.util.*;
 
-public class VariableOption extends MultiOption
+public class VariableOption<T> extends MultiOption
 {
-	ArrayList<Exec> options;
+	ArrayList<Exec<T>> options;
 
-	public VariableOption(ArrayList<Exec> options, int lockon, int cascade, int... location)
+	public VariableOption(ArrayList<Exec<T>> options, int lockon, int cascade, int... location)
 	{
 		super(options.stream().map(Exec::name).toArray(e -> new String[options.size()]), lockon, cascade, location);
 		this.options = options;
@@ -17,8 +17,8 @@ public class VariableOption extends MultiOption
 		for(int i = 0; i < in.size() && weg == 0; i++)
 			if(in.get(i).weg() > 0)
 			{
-				options.get(i).exec.accept(null);
-				weg = 1;
+				options.get(i).los();
+				return 1;
 			}
 		return weg;
 	}

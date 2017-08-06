@@ -59,7 +59,7 @@ public class NPMark extends Mark
 			{
 				//Hineingehen
 				Haus h = (Haus) ziel.marked;
-				if(h.innenRaum().voll())
+				if(InnenRaum.von(h).voll())
 					XKarte.gui.add(new UIAnschluss(h.auf, h, 1, -1,
 							new InfoTimed("Haus voll", false, 100, 2, 2, 1, 1, 2, 2, 1, 1, 2)));
 				else
@@ -82,10 +82,10 @@ public class NPMark extends Mark
 				/*XKarte.gui.add(new UIAnschluss(h.auf, h, 1, -1,
 						new InfoTimed("Haus", false, 100, 2, 2, 1, 1, 2, 2, 1, 1, 2)));*/
 				XKarte.gui.add(new UIAnschluss(0, 0, new HausGUI(h)));
-			else if(ziel.marked instanceof Haus)
+			/*else if(ziel.marked instanceof Haus)
 			{
 				//Kabel verlegen
-			}
+			}*/
 		/*else if(ziel.marked instanceof NPChara)
 		{
 			//Energiestrahlen?

@@ -1,6 +1,8 @@
 package z.np.haus;
 
-public class Bauplan
+import z.np.boden.*;
+
+public class Bauplan extends BodenItem
 {
 
 }

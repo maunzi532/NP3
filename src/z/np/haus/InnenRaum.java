@@ -10,12 +10,18 @@ public class InnenRaum extends InnenTeil
 
 	public InnenRaum(Haus von, int anteil)
 	{
-		super(von, anteil);
+		super(InnenTeilTyp.RAUM, von, anteil);
 		charaLimit = anteil / 10;
 	}
 
 	public boolean voll()
 	{
 		return charas.size() >= charaLimit;
+	}
+
+	public static InnenRaum von(Haus h)
+	{
+		InnenTeil t = h.innen.get(InnenTeilTyp.RAUM);
+		return (InnenRaum) t;
 	}
 }

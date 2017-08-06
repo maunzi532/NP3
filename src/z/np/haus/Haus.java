@@ -4,17 +4,15 @@ import java.util.*;
 import karte.*;
 import pfadfind.*;
 import z.np.*;
+import z.np.boden.*;
 
-public class Haus extends KChara implements Einheit
+public class Haus extends KChara implements Transferer
 {
 	Bauplan plan;
 	HashMap<InnenTeilTyp, InnenTeil> innen = new HashMap<>();
 
 	ArrayList<LinkKabel> rein = new ArrayList<>();
 	ArrayList<LinkKabel> raus = new ArrayList<>();
-	long kabellimit;
-	long transferlimit;
-	long itemlimit;
 
 	long stabil;
 	long maxStabil;
@@ -25,8 +23,38 @@ public class Haus extends KChara implements Einheit
 		innen.put(InnenTeilTyp.RAUM, new InnenRaum(this, 200));
 	}
 
-	public InnenRaum innenRaum()
+	@Override
+	public boolean requestEnergie(long menge, boolean real)
 	{
-		return (InnenRaum) innen.get(InnenTeilTyp.RAUM);
+		InnenEnergie ie = InnenEnergie.von(this);
+		return ie != null && ie.requestEnergie(menge, real);
+	}
+
+	@Override
+	public long acceptEnergie(long menge, boolean real)
+	{
+		InnenEnergie ie = InnenEnergie.von(this);
+		return ie == null ? menge : ie.acceptEnergie(menge, real);
+	}
+
+	@Override
+	public boolean requestMaterie(Materie mat, boolean real)
+	{
+		InnenMaterie im = InnenMaterie.von(this);
+		return im != null && im.requestMaterie(mat, real);
+	}
+
+	@Override
+	public Materie acceptMaterie(Materie mat, boolean real)
+	{
+		InnenMaterie im = InnenMaterie.von(this);
+		return im == null ? mat : im.acceptMaterie(mat, real);
+	}
+
+	@Override
+	public boolean acceptItem(Item item, boolean real)
+	{
+		InnenItems it = InnenItems.von(this);
+		return it != null && it.acceptItem(item, real);
 	}
 }

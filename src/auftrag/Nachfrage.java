@@ -5,18 +5,18 @@ import interf.*;
 import java.util.*;
 import karte.*;
 
-public class Nachfrage extends Auftrag
+public class Nachfrage<T extends KObjekt> extends Auftrag
 {
-	KObjekt ziel;
-	ArrayList<Exec> optionen;
+	T ziel;
+	ArrayList<Exec<T>> optionen;
 
-	public Nachfrage(KObjekt ziel, ArrayList<Exec> optionen)
+	public Nachfrage(T ziel, ArrayList<Exec<T>> optionen)
 	{
 		this.ziel = ziel;
 		this.optionen = optionen;
 	}
 
-	public Nachfrage(KObjekt ziel, ArrayList<Exec> optionen, Auftrag danach)
+	public Nachfrage(T ziel, ArrayList<Exec<T>> optionen, Auftrag danach)
 	{
 		super(danach);
 		this.ziel = ziel;

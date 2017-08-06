@@ -27,7 +27,7 @@ public class BetreteZiel extends Auftrag
 				return false;
 			NPChara c = (NPChara) chara;
 			c.auf.chg.add(c);
-			ziel.innenRaum().charas.add(c);
+			InnenRaum.von(ziel).charas.add(c);
 		}
 		return null;
 	}
