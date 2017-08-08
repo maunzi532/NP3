@@ -5,13 +5,22 @@ import z.np.*;
 
 public class InnenItems extends InnenTeil implements Transferer
 {
-	ArrayList<Item> items = new ArrayList<>();
+	List<Item> items = new ArrayList<>();
 	int itemlimit;
 
 	public InnenItems(Haus von, int anteil)
 	{
-		super(InnenTeilTyp.ITEMORDNER, von, anteil);
-		itemlimit = anteil / 2;
+		super(InnenTeilTyp.ITEMORDNER, von);
+		setAnteil(anteil);
+	}
+
+	@Override
+	public void setAnteil(long anteil1)
+	{
+		anteil = anteil1;
+		itemlimit = (int)(anteil / 2);
+		if(items.size() > itemlimit)
+			items = items.subList(0, itemlimit);
 	}
 
 	@Override

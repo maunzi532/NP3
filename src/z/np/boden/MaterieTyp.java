@@ -8,11 +8,11 @@ public enum MaterieTyp
 	WASSER(16, 10, 1),
 	GSL(8, 8, 3);
 
-	final boolean fluid;
-	final int tpb;
-	final int invspc;
-	final int tiefe;
-	final int temp;
+	public final boolean fluid;
+	public final int tpb;
+	public final int invspc;
+	public final int tiefe;
+	public final int temp;
 
 	MaterieTyp(int tpb, int invspc, int tiefe, int temp)
 	{

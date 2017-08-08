@@ -8,6 +8,7 @@ import z.np.boden.*;
 
 public class Haus extends KChara implements Transferer
 {
+	NPKarte auf2;
 	Bauplan plan;
 	HashMap<InnenTeilTyp, InnenTeil> innen = new HashMap<>();
 
@@ -20,7 +21,7 @@ public class Haus extends KChara implements Transferer
 	public Haus(int x, int y, int xg, int yg, boolean sichtbar, boolean solide, Karte auf)
 	{
 		super(x, y, xg, yg, sichtbar, solide, auf);
-		innen.put(InnenTeilTyp.RAUM, new InnenRaum(this, 200));
+		innen.put(InnenTeilTyp.RAUM, new InnenRaum(this, 150));
 	}
 
 	@Override

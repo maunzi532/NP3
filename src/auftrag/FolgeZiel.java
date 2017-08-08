@@ -3,7 +3,7 @@ package auftrag;
 import karte.*;
 import pfadfind.*;
 
-public class FolgeZiel extends Auftrag
+public class FolgeZiel extends Auftrag<KChara>
 {
 	public KObjekt ziel;
 	public Koordinate lZiel;

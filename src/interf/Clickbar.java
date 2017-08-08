@@ -6,12 +6,18 @@ public abstract class Clickbar extends UITeil
 {
 	boolean clickbar;
 
+	public Clickbar()
+	{
+		clickbar = true;
+	}
+
 	public Clickbar(int cascade, int... location)
 	{
 		super(cascade, location);
 		clickbar = true;
 	}
 
+	@Override
 	public Clickbar registerClick2(int cx, int cy, int xn, int yn, int xr, int yr)
 	{
 		if(clickbar && cx >= xn - xr && cy >= yn - yr && cx < xn + xr && cy < yn + yr)

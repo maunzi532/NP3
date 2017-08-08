@@ -3,7 +3,7 @@ package z.np.haus;
 import auftrag.*;
 import z.np.*;
 
-public class BetreteZiel extends Auftrag
+public class BetreteZiel extends Auftrag<NPChara>
 {
 	public Haus ziel;
 
@@ -22,13 +22,7 @@ public class BetreteZiel extends Auftrag
 	public Boolean los(boolean bewegt, boolean abbruch)
 	{
 		if(!bewegt)
-		{
-			if(!ziel.existent || chara.abstand(ziel) > 2)
-				return false;
-			NPChara c = (NPChara) chara;
-			c.auf.chg.add(c);
-			InnenRaum.von(ziel).charas.add(c);
-		}
+			return ziel.existent && chara.abstand(ziel) <= 2 && InnenRaum.von(ziel).rein(chara);
 		return null;
 	}
 }

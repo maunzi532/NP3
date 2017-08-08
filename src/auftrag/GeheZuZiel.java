@@ -2,7 +2,7 @@ package auftrag;
 
 import pfadfind.*;
 
-public class GeheZuZiel extends Auftrag
+public class GeheZuZiel extends Auftrag<KChara>
 {
 	public Koordinate ziel;
 	public int abstand;

@@ -1,15 +1,16 @@
 package z.np.haus;
 
-public class InnenTeil
+public abstract class InnenTeil
 {
 	InnenTeilTyp typ;
 	Haus von;
-	int anteil;
+	long anteil;
 
-	public InnenTeil(InnenTeilTyp typ, Haus von, int anteil)
+	public InnenTeil(InnenTeilTyp typ, Haus von)
 	{
 		this.typ = typ;
 		this.von = von;
-		this.anteil = anteil;
 	}
+
+	public abstract void setAnteil(long anteil1);
 }

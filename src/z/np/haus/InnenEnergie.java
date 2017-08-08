@@ -9,8 +9,17 @@ public class InnenEnergie extends InnenTeil implements Transferer
 
 	public InnenEnergie(Haus von, int anteil)
 	{
-		super(InnenTeilTyp.ENERGIESPEICHER, von, anteil);
+		super(InnenTeilTyp.ENERGIESPEICHER, von);
+		setAnteil(anteil);
+	}
+
+	@Override
+	public void setAnteil(long anteil1)
+	{
+		anteil = anteil1;
 		maxenergie = anteil * anteil;
+		if(energie > maxenergie)
+			energie = maxenergie;
 	}
 
 	@Override

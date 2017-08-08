@@ -2,9 +2,9 @@ package auftrag;
 
 import pfadfind.*;
 
-public abstract class Auftrag
+public abstract class Auftrag<T extends KChara>
 {
-	public KChara chara;
+	public T chara;
 	public Auftrag danach;
 
 	public Auftrag(){}
@@ -16,7 +16,7 @@ public abstract class Auftrag
 
 	public abstract Boolean los(boolean bewegt, boolean abbruch);
 
-	public void an(KChara chara)
+	public void an(T chara)
 	{
 		this.chara = chara;
 		chara.auftrag = this;

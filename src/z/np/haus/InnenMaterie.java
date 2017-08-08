@@ -1,6 +1,7 @@
 package z.np.haus;
 
 import java.util.*;
+import java.util.stream.*;
 import z.np.*;
 import z.np.boden.*;
 
@@ -12,8 +13,25 @@ public class InnenMaterie extends InnenTeil implements Transferer
 
 	public InnenMaterie(Haus von, int anteil)
 	{
-		super(InnenTeilTyp.MATERIELAGER, von, anteil);
+		super(InnenTeilTyp.MATERIELAGER, von);
+		setAnteil(anteil);
+	}
+
+	@Override
+	public void setAnteil(long anteil1)
+	{
+		anteil = anteil1;
 		kapazitaet = anteil * anteil / 10;
+		long zuviel = menge - kapazitaet;
+		if(zuviel > 0)
+			for(MaterieTyp tr : inhalt.keySet().stream().sorted(Comparator.comparingInt(Enum::ordinal)).collect(Collectors.toList()))
+				if(inhalt.get(tr) >= zuviel)
+				{
+					inhalt.put(tr, inhalt.get(tr) - zuviel);
+					break;
+				}
+				else
+					zuviel -= inhalt.remove(tr);
 	}
 
 	@Override

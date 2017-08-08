@@ -8,7 +8,8 @@ public abstract class Karte<T extends Feld>
 	public int xw;
 	public int yw;
 	public ArrayList<KObjekt> objekte = new ArrayList<>();
-	public ArrayList<KObjekt> chg = new ArrayList<>();
+	public ArrayList<KObjekt> add = new ArrayList<>();
+	public ArrayList<KObjekt> rem = new ArrayList<>();
 	public T[][] fliesen;
 
 	public Karte(int xw, int yw)
@@ -56,10 +57,10 @@ public abstract class Karte<T extends Feld>
 	{
 		for(KObjekt k : objekte)
 			k.tick();
-		for(KObjekt k : chg)
-			if(!objekte.remove(k))
-				objekte.add(k);
-		chg.clear();
+		objekte.removeAll(rem);
+		objekte.addAll(add);
+		rem.clear();
+		add.clear();
 	}
 
 	public boolean[][] bewK(int xg, int yg, KObjekt wer)
