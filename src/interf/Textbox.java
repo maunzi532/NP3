@@ -23,11 +23,9 @@ public class Textbox extends Clickbar
 	}
 
 	@Override
-	public Clickbar registerClick2(int cx, int cy, int xn, int yn, int xr, int yr)
+	public boolean registerClick2(int cx, int cy, int xn, int yn, int xr, int yr)
 	{
-		if(clickbar)
-			return this;
-		return null;
+		return clickbar;
 	}
 
 	@Override

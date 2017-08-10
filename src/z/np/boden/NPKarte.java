@@ -8,9 +8,10 @@ import pfadfind.*;
 
 public class NPKarte extends Karte<Bodenteil>
 {
+	int level;
 	public ArrayList<FluidG> pools;
 
-	public NPKarte(int xw, int yw)
+	public NPKarte(int level, int xw, int yw)
 	{
 		super(xw, yw);
 		fliesen = new Bodenteil[xw][yw];

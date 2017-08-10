@@ -2,6 +2,7 @@ package interf;
 
 import idk.*;
 import java.awt.*;
+import java.util.*;
 import karte.*;
 
 public class UIAnschluss
@@ -58,11 +59,9 @@ public class UIAnschluss
 			inhalt.aufzeichnen(gd, bloc(d));
 	}
 
-	public Clickbar registerClick(int cx, int cy, PlD d)
+	public boolean registerClick(ArrayList<Clickbar> alle, int cx, int cy, PlD d)
 	{
-		if(auf == null || auf == XKarte.aktuell)
-			return inhalt.registerClick(cx, cy, bloc(d));
-		return null;
+		return (auf == null || auf == XKarte.aktuell) && inhalt.registerClick(alle, cx, cy, bloc(d));
 	}
 
 	public boolean weg()

@@ -26,6 +26,7 @@ public class InnenRaum extends InnenTeil
 			return false;
 		chara.auf.rem.add(chara);
 		charas.add(chara);
+		update = true;
 		return true;
 	}
 
@@ -38,6 +39,7 @@ public class InnenRaum extends InnenTeil
 			charas = new ArrayList<>();
 		while(charas.size() > charaLimit)
 			raus(charas.size() - 1);
+		update = true;
 	}
 
 	public void raus(NPChara chara)
@@ -47,7 +49,6 @@ public class InnenRaum extends InnenTeil
 
 	public void raus(int num)
 	{
-		System.out.println(num);
 		if(num < 0 || num >= charas.size())
 			return;
 		NPChara chara = charas.remove(num);
@@ -55,6 +56,7 @@ public class InnenRaum extends InnenTeil
 			von.auf2.addCharaInArea(chara, von);
 		else
 			((NPKarte)von.auf).addCharaInArea(chara, von);
+		update = true;
 	}
 
 	public static InnenRaum von(Haus h)

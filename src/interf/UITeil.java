@@ -36,24 +36,16 @@ public class UITeil
 
 	public void aufzeichnen1(Graphics2D gd, int xn, int yn, int xr, int yr){}
 
-	public Clickbar registerClick(int cx, int cy, int... bloc)
+	public boolean registerClick(ArrayList<Clickbar> alle, int cx, int cy, int... bloc)
 	{
 		int xn = bloc[0] + bloc[2] * location[0] / location[1];
 		int yn = bloc[1] + bloc[3] * location[2] / location[3];
 		int xr2 = bloc[2] * location[4] / location[5];
 		int yr2 = bloc[3] * location[6] / location[7];
 		for(int i = in.size() - 1; i >= 0; i--)
-		{
-			Clickbar cl = in.get(i).registerClick(cx, cy, xn, yn, xr2, yr2);
-			if(cl != null)
-				return cl;
-		}
-		return registerClick2(cx, cy, xn, yn, xr2, yr2);
-	}
-
-	public Clickbar registerClick2(int cx, int cy, int xn, int yn, int xr, int yr)
-	{
-		return null;
+			if(in.get(i).registerClick(alle, cx, cy, xn, yn, xr2, yr2))
+				return true;
+		return false;
 	}
 
 	public int weg()

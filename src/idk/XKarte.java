@@ -62,15 +62,17 @@ public class XKarte
 
 	public static void maus(int xp, int yp)
 	{
-		Clickbar cl = null;
-		for(int i = 0; i < gui.size() && cl == null; i++)
-			cl = gui.get(i).registerClick(xp, yp, d);
-		if(cl != null)
-			cl.onFokus();
+		ArrayList<Clickbar> cl = new ArrayList<>();
+		boolean taken = false;
+		for(int i = 0; i < gui.size() && !taken; i++)
+			if(gui.get(i).registerClick(cl, xp, yp, d))
+				taken = true;
+		for(Clickbar cl1 : cl)
+			cl1.onFokus();
 		gui.removeIf(UIAnschluss::weg);
 		int xcal = d.xcal(xp);
 		int ycal = d.ycal(yp);
-		if(aktuell != null && cl == null && xcal >= 0 && ycal >= 0 && xcal < aktuell.xw * d.fwx && ycal < aktuell.yw * d.fwy)
+		if(aktuell != null && !taken && xcal >= 0 && ycal >= 0 && xcal < aktuell.xw * d.fwx && ycal < aktuell.yw * d.fwy)
 			mark.mdk(xcal / d.fwx, ycal / d.fwy, aktuell);
 		else
 			mark.mdk(-1, -1, null);

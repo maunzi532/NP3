@@ -15,9 +15,11 @@ public class NPMark extends Mark
 
 	public NPMark()
 	{
-		Karte k = new NPKarte(10, 10);
+		Schichten schichten = new Schichten(1, 0, 10, 10);
+		Karte k = schichten.karte(0);
 		XKarte.aktuell = k;
 		XKarte.karten.add(k);
+		XKarte.karten.add(schichten.karte(-1));
 		k.objekte.add(new Haus(0, 0, 2, 2, true, true, k));
 		for(int i = 0; i < k.xw; i++)
 			k.objekte.add(new NPChara(i, 2, 1, 1, true, true, k));

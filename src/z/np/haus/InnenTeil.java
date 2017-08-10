@@ -5,6 +5,7 @@ public abstract class InnenTeil
 	InnenTeilTyp typ;
 	Haus von;
 	long anteil;
+	boolean update;
 
 	public InnenTeil(InnenTeilTyp typ, Haus von)
 	{

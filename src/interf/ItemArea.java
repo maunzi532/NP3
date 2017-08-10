@@ -18,6 +18,7 @@ public class ItemArea<T> extends Clickbar
 	public ItemArea(ArrayList<T> list, Function<T, UITeil> conv, int cols, int rows, int cascade, int... location)
 	{
 		super(cascade, location);
+		shark = true;
 		this.list = list;
 		this.cols = cols;
 		this.rows = rows;
@@ -35,6 +36,8 @@ public class ItemArea<T> extends Clickbar
 		}
 		if(cols * rows < list.size())
 			maxscroll = (list.size() - 1) / cols + 1 - rows;
+		else
+			maxscroll = 0;
 		if(tscroll > maxscroll)
 			tscroll = maxscroll;
 	}
@@ -82,7 +85,6 @@ public class ItemArea<T> extends Clickbar
 			t.aufzeichnen(gd, xn, yn, xr2, yr2);
 		aufzeichnen2(gd, xn, yn, xr2, yr2);
 		gd.setClip(null);
-
 	}
 
 	@Override

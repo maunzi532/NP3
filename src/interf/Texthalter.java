@@ -1,6 +1,7 @@
 package interf;
 
 import java.awt.*;
+import java.util.*;
 
 public class Texthalter extends UITeil
 {
@@ -25,21 +26,20 @@ public class Texthalter extends UITeil
 			in.get(0).aufzeichnen(gd, xn, yn, xr2, yr2);
 	}
 
-	public Clickbar registerClick(int cx, int cy, int... bloc)
+	@Override
+	public boolean registerClick(ArrayList<Clickbar> alle, int cx, int cy, int... bloc)
 	{
 		int xn = bloc[0] + bloc[2] * location[0] / location[1];
 		int yn = bloc[1] + bloc[3] * location[2] / location[3];
 		int xr2 = bloc[2] * location[4] / location[5];
 		int yr2 = bloc[3] * location[6] / location[7];
 		if(in.size() > 0)
-		{
-			Clickbar cl = in.get(0).registerClick(cx, cy, xn, yn, xr2, yr2);
-			if(cl != null)
-				return cl;
-		}
-		return registerClick2(cx, cy, xn, yn, xr2, yr2);
+			if(in.get(0).registerClick(alle, cx, cy, xn, yn, xr2, yr2))
+				return true;
+		return false;
 	}
 
+	@Override
 	public int weg()
 	{
 		if(in.size() > 0 && in.get(0).weg() > 0)

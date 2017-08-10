@@ -1,6 +1,7 @@
 package interf;
 
 import java.awt.*;
+import java.util.*;
 import java.util.function.*;
 
 public class InvHand<T> extends UITeil
@@ -15,11 +16,11 @@ public class InvHand<T> extends UITeil
 	}
 
 	@Override
-	public Clickbar registerClick(int cx, int cy, int... bloc)
+	public boolean registerClick(ArrayList<Clickbar> alle, int cx, int cy, int... bloc)
 	{
 		x = cx;
 		y = cy;
-		return null;
+		return false;
 	}
 
 	@Override
