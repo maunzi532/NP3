@@ -17,6 +17,7 @@ public class NPKarte extends Karte<Bodenteil> implements CharaTransferer
 	public NPKarte(int level, int xw, int yw, Portal portal)
 	{
 		super(xw, yw);
+		this.level = level;
 		this.portal = portal;
 		fliesen = new Bodenteil[xw][yw];
 		pools = new ArrayList<>();
@@ -67,40 +68,6 @@ public class NPKarte extends Karte<Bodenteil> implements CharaTransferer
 		if(r > 0)
 			y += r - 2;
 		return fliesen[x][y].fluidG;
-	}
-
-	public boolean addCharaInArea(NPChara chara, KChara von)
-	{
-		int minx = von.x - 1;
-		if(minx < 0)
-			minx = 0;
-		int endx = von.x + von.xg + 1;
-		if(endx > xw)
-			endx = xw;
-		int miny = von.y - 1;
-		if(miny < 0)
-			miny = 0;
-		int endy = von.y + von.yg + 1;
-		if(endy > yw)
-			endy = yw;
-		ArrayList<Bodenteil> auswahl = new ArrayList<>();
-		for(int ix = minx; ix < endx; ix++)
-			for(int iy = miny; iy < endy; iy++)
-				auswahl.add(fliese(ix, iy));
-		Optional<Bodenteil> zielort1 = auswahl.stream()
-				.filter(e -> begehbar(new KOrt(e.x, e.y, 1, 1), chara))
-				.min(Comparator.comparingInt(e -> chara.abstand(e.x, e.y)));
-		if(zielort1.isPresent())
-		{
-			Bodenteil zielort = zielort1.get();
-			chara.x = zielort.x;
-			chara.y = zielort.y;
-			chara.auf = this;
-			add.add(chara);
-			charas.add(chara);
-			return true;
-		}
-		return false;
 	}
 
 	@Override

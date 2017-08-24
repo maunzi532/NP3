@@ -9,7 +9,7 @@ public class ItemArea<T> extends Clickbar
 {
 	private static final int scrPerItem = 20;
 
-	List<T> list;
+	public List<T> list;
 	int cols, rows;
 	Function<T, UITeil> conv;
 	int maxscroll;
@@ -29,15 +29,12 @@ public class ItemArea<T> extends Clickbar
 
 	public void positionen()
 	{
-		ArrayList<UITeil> in1 = new ArrayList<>();
+		in = new ArrayList<>();
 		for(int i = 0; i < list.size(); i++)
 		{
-			in1.add(conv.apply(list.get(i)));
-			position(i, in1);
+			in.add(conv.apply(list.get(i)));
+			position(i, in);
 		}
-		if(in1.equals(in))
-			return;
-		in = in1;
 		if(cols * rows < list.size())
 			maxscroll = (list.size() - 1) / cols + 1 - rows;
 		else
@@ -46,7 +43,7 @@ public class ItemArea<T> extends Clickbar
 			tscroll = maxscroll;
 	}
 
-	private void position(int i, ArrayList<UITeil> in1)
+	private void position(int i, List<UITeil> in1)
 	{
 		int xo = i % cols;
 		int yo = i / cols;

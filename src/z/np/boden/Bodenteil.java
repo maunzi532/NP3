@@ -11,7 +11,6 @@ import z.np.transfer.*;
 public class Bodenteil extends Feld implements MaterieTransferer, ItemTransferer
 {
 	public static final int fluidKapazitaet = 16;
-	public static final int wandKapazitaet = 16;
 
 	FluidG fluidG;
 	Item bItem;
