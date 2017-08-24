@@ -5,7 +5,7 @@ import idk.*;
 import java.util.*;
 import karte.*;
 
-public class KChara extends KObjekt
+public class KChara<T extends Karte> extends KObjekt<T>
 {
 	Koordinate cs;
 	Koordinate ct;
@@ -18,7 +18,7 @@ public class KChara extends KObjekt
 	public Auftrag auftrag = null;
 	public ArrayList<Koordinate> pfad = new ArrayList<>();
 
-	public KChara(int x, int y, int xg, int yg, boolean sichtbar, boolean solide, Karte auf)
+	public KChara(int x, int y, int xg, int yg, boolean sichtbar, boolean solide, T auf)
 	{
 		super(x, y, xg, yg, sichtbar, solide, auf);
 		anzielbar = true;

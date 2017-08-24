@@ -2,6 +2,8 @@ package z.np.haus;
 
 import interf.*;
 import java.awt.*;
+import java.util.List;
+import z.np.*;
 
 public class HausGUI extends XArea
 {
@@ -12,17 +14,19 @@ public class HausGUI extends XArea
 	{
 		super(7, 8, new DeadArea(Color.GRAY, Color.BLACK));
 		this.h = h;
-		charaArea = new ItemArea<>(InnenRaum.von(h).charas, e -> new HausGUIChara(h, e), 2, 3, 0, 0, 1, 0, 1, 1, 3, 1, 2);
-		in.add(charaArea);
+		List<NPChara> charas = h.zeigeCharas();
+		if(charas != null)
+		{
+			charaArea = new ItemArea<>(charas, e -> new HausGUIChara(h, e), 2, 3, 0, 0, 1, 0, 1, 1, 3, 1, 2);
+			in.add(charaArea);
+		}
 	}
 
 	@Override
 	public int weg()
 	{
-		if(InnenRaum.von(h).update)
+		if(charaArea != null)
 			charaArea.positionen();
-		for(InnenTeil it : h.innen.values())
-			it.update = false;
 		return super.weg();
 	}
 }

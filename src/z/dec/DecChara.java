@@ -1,15 +1,14 @@
 package z.dec;
 
 import idk.*;
-import karte.*;
 import pfadfind.*;
 import z.dec.duell.*;
 
-public class DecChara extends KChara
+public class DecChara extends KChara<DecKarte>
 {
 	S4I s4i;
 
-	public DecChara(int x, int y, int xg, int yg, boolean sichtbar, boolean solide, Karte auf)
+	public DecChara(int x, int y, int xg, int yg, boolean sichtbar, boolean solide, DecKarte auf)
 	{
 		super(x, y, xg, yg, sichtbar, solide, auf);
 		s4i = new S4I(0, 0, 0, 1, 0, 0, 0);

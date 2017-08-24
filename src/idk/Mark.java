@@ -6,8 +6,6 @@ import karte.*;
 
 public abstract class Mark
 {
-	public boolean alleKarten;
-
 	public Marker fokus;
 	public Marker ziel;
 	public Marker hover;

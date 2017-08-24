@@ -1,4 +1,4 @@
-package z.np.haus;
+package z.np.haus.innen;
 
 public enum InnenTeilTyp
 {
@@ -6,14 +6,11 @@ public enum InnenTeilTyp
 	RAUM,
 	SICHT,
 
-	SCHACHT,
-
 	ENERGIESPEICHER,
 	MATERIELAGER,
 	ITEMORDNER,
 
 	FAHRTEIL,
 	SCHWIMMTEIL,
-	FLUGTEIL,
-	PILOT
+	FLUGTEIL
 }

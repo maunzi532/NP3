@@ -3,13 +3,15 @@ package idk;
 import interf.*;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 import karte.*;
 
 public class XKarte
 {
-	public static ArrayList<Karte> karten = new ArrayList<>();
+	public static List<Karte> karten = new ArrayList<>();
 	public static Karte aktuell;
 	public static Mark mark;
+	public static Xtb xtb;
 	public static ArrayList<UIAnschluss> gui = new ArrayList<>();
 	public static Texthalter th;
 	public static KObjekt kamLock;
@@ -50,7 +52,7 @@ public class XKarte
 		d.calc();
 		maus(xp, yp);
 		mark.verarbeite();
-		if(mark.alleKarten)
+		if(xtb.alleKarten)
 			for(Karte k : karten)
 				k.tick();
 		else if(aktuell != null)

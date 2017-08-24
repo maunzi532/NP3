@@ -1,15 +1,16 @@
-package z.np.haus;
+package z.np.haus.innen;
 
 import java.util.*;
 import java.util.stream.*;
-import z.np.*;
 import z.np.boden.*;
+import z.np.haus.*;
+import z.np.transfer.*;
 
-public class InnenMaterie extends InnenTeil implements Transferer
+public class InnenMaterie extends InnenTeil implements MaterieTransferer
 {
-	HashMap<MaterieTyp, Long> inhalt;
-	long menge;
-	long kapazitaet;
+	private HashMap<MaterieTyp, Long> inhalt = new HashMap<>();
+	private long menge;
+	private long kapazitaet;
 
 	public InnenMaterie(Haus von, int anteil)
 	{
@@ -72,9 +73,21 @@ public class InnenMaterie extends InnenTeil implements Transferer
 		return new Materie(mat.typ, mat.menge - abzug);
 	}
 
+	@Override
+	public HashMap<MaterieTyp, Long> zeigeMaterie()
+	{
+		return inhalt;
+	}
+
+	@Override
+	public long maxMaterie()
+	{
+		return kapazitaet;
+	}
+
 	public static InnenMaterie von(Haus h)
 	{
-		InnenTeil t = h.innen.get(InnenTeilTyp.MATERIELAGER);
+		InnenTeil t = h.getInnenTeil(InnenTeilTyp.MATERIELAGER);
 		return t == null ? null : (InnenMaterie) t;
 	}
 }

@@ -3,30 +3,13 @@ package z.np;
 import auftrag.*;
 import idk.*;
 import interf.*;
-import karte.*;
 import pfadfind.*;
-import z.np.boden.*;
 import z.np.haus.*;
 
 public class NPMark extends Mark
 {
 	private static final int dticks = 10;
 	private int dtick = 10;
-
-	public NPMark()
-	{
-		Schichten schichten = new Schichten(1, 0, 10, 10);
-		Karte k = schichten.karte(0);
-		XKarte.aktuell = k;
-		XKarte.karten.add(k);
-		XKarte.karten.add(schichten.karte(-1));
-		k.objekte.add(new Haus(0, 0, 2, 2, true, true, k));
-		for(int i = 0; i < k.xw; i++)
-			k.objekte.add(new NPChara(i, 2, 1, 1, true, true, k));
-		for(int i = 0; i < k.xw; i++)
-			k.objekte.add(new NPChara(i, 3, 1, 1, true, true, k));
-		alleKarten = true;
-	}
 
 	@Override
 	public void verarbeite()
@@ -61,7 +44,7 @@ public class NPMark extends Mark
 			{
 				//Hineingehen
 				Haus h = (Haus) ziel.marked;
-				if(InnenRaum.von(h).voll())
+				if(h.zeigeCharas().size() >= h.maxCharas())
 					XKarte.gui.add(new UIAnschluss(h.auf, h, 1, -1,
 							new InfoTimed("Haus voll", false, 100, 2, 2, 1, 1, 2, 2, 1, 1, 2)));
 				else

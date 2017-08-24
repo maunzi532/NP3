@@ -1,12 +1,14 @@
-package z.np.haus;
+package z.np.haus.innen;
 
 import java.util.*;
 import z.np.*;
+import z.np.haus.*;
+import z.np.transfer.*;
 
-public class InnenItems extends InnenTeil implements Transferer
+public class InnenItems extends InnenTeil implements ItemTransferer
 {
-	List<Item> items = new ArrayList<>();
-	int itemlimit;
+	private List<Item> items = new ArrayList<>();
+	private int itemlimit;
 
 	public InnenItems(Haus von, int anteil)
 	{
@@ -24,6 +26,12 @@ public class InnenItems extends InnenTeil implements Transferer
 	}
 
 	@Override
+	public boolean requestItem(Item item, boolean real)
+	{
+		return real ? items.remove(item) : items.contains(item);
+	}
+
+	@Override
 	public boolean acceptItem(Item item, boolean real)
 	{
 		if(items.size() >= itemlimit)
@@ -33,9 +41,21 @@ public class InnenItems extends InnenTeil implements Transferer
 		return true;
 	}
 
+	@Override
+	public List<Item> zeigeItems()
+	{
+		return items;
+	}
+
+	@Override
+	public long maxItems()
+	{
+		return itemlimit;
+	}
+
 	public static InnenItems von(Haus h)
 	{
-		InnenTeil t = h.innen.get(InnenTeilTyp.ITEMORDNER);
+		InnenTeil t = h.getInnenTeil(InnenTeilTyp.ITEMORDNER);
 		return t == null ? null : (InnenItems) t;
 	}
 }

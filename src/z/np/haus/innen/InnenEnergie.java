@@ -1,11 +1,12 @@
-package z.np.haus;
+package z.np.haus.innen;
 
-import z.np.*;
+import z.np.haus.*;
+import z.np.transfer.*;
 
-public class InnenEnergie extends InnenTeil implements Transferer
+public class InnenEnergie extends InnenTeil implements EnergieTransferer
 {
-	long energie;
-	long maxenergie;
+	private long energie;
+	private long maxenergie;
 
 	public InnenEnergie(Haus von, int anteil)
 	{
@@ -41,9 +42,21 @@ public class InnenEnergie extends InnenTeil implements Transferer
 		return menge - abzug;
 	}
 
+	@Override
+	public Long zeigeEnergie()
+	{
+		return energie;
+	}
+
+	@Override
+	public long maxEnergie()
+	{
+		return maxenergie;
+	}
+
 	public static InnenEnergie von(Haus h)
 	{
-		InnenTeil t = h.innen.get(InnenTeilTyp.ENERGIESPEICHER);
+		InnenTeil t = h.getInnenTeil(InnenTeilTyp.ENERGIESPEICHER);
 		return t == null ? null : (InnenEnergie) t;
 	}
 }

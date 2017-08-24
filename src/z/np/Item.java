@@ -1,6 +1,9 @@
 package z.np;
 
-public class Item
+public abstract class Item
 {
-
+	public boolean platzierbar(boolean infg, int tiefe)
+	{
+		return false;
+	}
 }

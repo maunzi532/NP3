@@ -3,9 +3,7 @@ package idk;
 import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
-import z.dec.*;
 import z.np.*;
-import z.sweeper.*;
 
 public class Fenster
 {
@@ -23,14 +21,14 @@ public class Fenster
 		XKarte.init1();
 		switch(args[0])
 		{
-			case "Sweeper":
+			/*case "Sweeper":
 				XKarte.mark = new SweeperMark();
 				break;
 			case "Dec":
 				XKarte.mark = new DecMark();
-				break;
+				break;*/
 			case "NP":
-				XKarte.mark = new NPMark();
+				XKarte.xtb = new NPXtb();
 				break;
 		}
 		XKarte.init2();
@@ -61,7 +59,7 @@ public class Fenster
 		fenster = new JFrame();
 		fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension bildschirm = Toolkit.getDefaultToolkit().getScreenSize();
-		flaeche = new Dimension(1200, 800);
+		flaeche = new Dimension(bildschirm.width / 6 * 5, bildschirm.height / 6 * 5);
 		fenster.setSize(flaeche);
 		fenster.setLocation((bildschirm.width - flaeche.width) / 2, (bildschirm.height - flaeche.height) / 2);
 		bild = new BufferedImage(flaeche.width, flaeche.height, BufferedImage.TYPE_INT_ARGB_PRE);

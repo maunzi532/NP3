@@ -2,9 +2,9 @@ package z.np.boden;
 
 import java.util.*;
 import java.util.stream.*;
-import z.np.*;
+import z.np.transfer.*;
 
-public class FluidG implements Transferer
+public class FluidG implements MaterieTransferer
 {
 	ArrayList<Bodenteil> teile;
 	HashMap<MaterieTyp, Long> inhalt;
@@ -27,7 +27,7 @@ public class FluidG implements Transferer
 
 	public long kapazitaet()
 	{
-		return teile.size() * 16;
+		return teile.size() * Bodenteil.fluidKapazitaet;
 	}
 
 	public long menge()
@@ -82,6 +82,18 @@ public class FluidG implements Transferer
 				solidMenge += abzug;
 		}
 		return new Materie(mat.typ, mat.menge - abzug);
+	}
+
+	@Override
+	public HashMap<MaterieTyp, Long> zeigeMaterie()
+	{
+		return inhalt;
+	}
+
+	@Override
+	public long maxMaterie()
+	{
+		return kapazitaet();
 	}
 
 	public List<MaterieTyp> sortiert()

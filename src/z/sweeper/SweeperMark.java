@@ -19,6 +19,7 @@ public class SweeperMark extends Mark
 		//kamLock = aktuell.objekte.get(1);
 		XKarte.gui.add(new UIAnschluss(1, 1, new MultiOption(new String[]{"W1", "W2"}, 0, 2, 0, 1, 0, 1, 1, 5, 1, 20))
 		{
+			@Override
 			public void code(int re)
 			{
 				System.out.println(re);

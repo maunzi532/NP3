@@ -1,16 +1,16 @@
 package z.np;
 
 import java.util.*;
-import karte.*;
 import pfadfind.*;
 import z.np.boden.*;
 import z.np.haus.*;
+import z.np.transfer.*;
 
-public class NPChara extends KChara implements Transferer
+public class NPChara extends KChara<NPKarte> implements EnergieTransferer, MaterieTransferer, ItemTransferer
 {
 	NTyp typ;
 
-	Haus inHaus;
+	public Haus inHaus;
 
 	long leben;
 	long lebenLimit;
@@ -24,7 +24,7 @@ public class NPChara extends KChara implements Transferer
 	ArrayList<Item> items = new ArrayList<>();
 	int itemlimit;
 
-	public NPChara(int x, int y, int xg, int yg, boolean sichtbar, boolean solide, Karte auf)
+	public NPChara(int x, int y, int xg, int yg, boolean sichtbar, boolean solide, NPKarte auf)
 	{
 		super(x, y, xg, yg, sichtbar, solide, auf);
 	}
@@ -46,6 +46,18 @@ public class NPChara extends KChara implements Transferer
 		if(real)
 			energie += abzug;
 		return menge - abzug;
+	}
+
+	@Override
+	public Long zeigeEnergie()
+	{
+		return energie;
+	}
+
+	@Override
+	public long maxEnergie()
+	{
+		return maxenergie;
 	}
 
 	@Override
@@ -78,6 +90,26 @@ public class NPChara extends KChara implements Transferer
 	}
 
 	@Override
+	public HashMap<MaterieTyp, Long> zeigeMaterie()
+	{
+		HashMap<MaterieTyp, Long> mat = new HashMap<>();
+		mat.put(therm.typ, therm.menge);
+		return mat;
+	}
+
+	@Override
+	public long maxMaterie()
+	{
+		return maxmaterie;
+	}
+
+	@Override
+	public boolean requestItem(Item item, boolean real)
+	{
+		return real ? items.remove(item) : items.contains(item);
+	}
+
+	@Override
 	public boolean acceptItem(Item item, boolean real)
 	{
 		if(items.size() >= itemlimit)
@@ -85,5 +117,17 @@ public class NPChara extends KChara implements Transferer
 		if(real)
 			items.add(item);
 		return true;
+	}
+
+	@Override
+	public List<Item> zeigeItems()
+	{
+		return items;
+	}
+
+	@Override
+	public long maxItems()
+	{
+		return itemlimit;
 	}
 }

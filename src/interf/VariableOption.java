@@ -12,6 +12,7 @@ public class VariableOption<T> extends MultiOption
 		this.options = options;
 	}
 
+	@Override
 	public int weg()
 	{
 		for(int i = 0; i < in.size() && weg == 0; i++)

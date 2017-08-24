@@ -37,7 +37,7 @@ public class GeheZuZiel extends Auftrag<KChara>
 						return false;
 				}
 				if(chara.pfad.size() > 0)
-					chara.declaregtf(chara.pfad.remove(0), 20);
+					chara.declaregtf((Koordinate) chara.pfad.remove(0), 20);
 			}
 		}
 		return null;

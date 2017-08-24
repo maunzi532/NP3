@@ -19,6 +19,9 @@ public class HausGUIChara extends Clickbar
 	public void onClick(int n)
 	{
 		if(n == 3)
-			InnenRaum.von(h).raus(wer);
+		{
+			if(!h.versende(h.auf, wer))
+				h.versende(h.auf.portal, wer);
+		}
 	}
 }

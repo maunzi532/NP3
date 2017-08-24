@@ -15,6 +15,7 @@ public class Texthalter extends UITeil
 		in.add(new Textbox(text, 0, 1, 0, 1, 1, 1, 1, 3));
 	}
 
+	@Override
 	public void aufzeichnen(Graphics2D gd, int... bloc)
 	{
 		int xn = bloc[0] + bloc[2] * location[0] / location[1];

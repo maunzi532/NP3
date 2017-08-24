@@ -1,11 +1,12 @@
-package z.np.haus;
+package z.np.haus.innen;
+
+import z.np.haus.*;
 
 public abstract class InnenTeil
 {
-	InnenTeilTyp typ;
-	Haus von;
-	long anteil;
-	boolean update;
+	protected InnenTeilTyp typ;
+	protected Haus von;
+	protected long anteil;
 
 	public InnenTeil(InnenTeilTyp typ, Haus von)
 	{

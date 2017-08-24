@@ -2,20 +2,21 @@ package interf;
 
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.function.*;
 
 public class ItemArea<T> extends Clickbar
 {
 	private static final int scrPerItem = 20;
 
-	ArrayList<T> list;
+	List<T> list;
 	int cols, rows;
 	Function<T, UITeil> conv;
 	int maxscroll;
 	int tscroll;
 	int scroll;
 
-	public ItemArea(ArrayList<T> list, Function<T, UITeil> conv, int cols, int rows, int cascade, int... location)
+	public ItemArea(List<T> list, Function<T, UITeil> conv, int cols, int rows, int cascade, int... location)
 	{
 		super(cascade, location);
 		shark = true;
@@ -28,12 +29,15 @@ public class ItemArea<T> extends Clickbar
 
 	public void positionen()
 	{
-		in = new ArrayList<>();
+		ArrayList<UITeil> in1 = new ArrayList<>();
 		for(int i = 0; i < list.size(); i++)
 		{
-			in.add(conv.apply(list.get(i)));
-			position(i);
+			in1.add(conv.apply(list.get(i)));
+			position(i, in1);
 		}
+		if(in1.equals(in))
+			return;
+		in = in1;
 		if(cols * rows < list.size())
 			maxscroll = (list.size() - 1) / cols + 1 - rows;
 		else
@@ -42,11 +46,11 @@ public class ItemArea<T> extends Clickbar
 			tscroll = maxscroll;
 	}
 
-	private void position(int i)
+	private void position(int i, ArrayList<UITeil> in1)
 	{
 		int xo = i % cols;
 		int yo = i / cols;
-		in.get(i).location = new int[]{1 - cols + xo * 2, cols, (1 - rows + yo * 2) * scrPerItem - scroll * 2, rows * scrPerItem, 1, cols, 1, rows};
+		in1.get(i).location = new int[]{1 - cols + xo * 2, cols, (1 - rows + yo * 2) * scrPerItem - scroll * 2, rows * scrPerItem, 1, cols, 1, rows};
 	}
 
 	@Override
@@ -56,7 +60,7 @@ public class ItemArea<T> extends Clickbar
 		{
 			scroll += scroll < tscroll * scrPerItem ? 1 : -1;
 			for(int i = 0; i < in.size(); i++)
-				position(i);
+				position(i, in);
 		}
 		return super.weg();
 	}

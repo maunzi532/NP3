@@ -22,7 +22,7 @@ public class BetreteZiel extends Auftrag<NPChara>
 	public Boolean los(boolean bewegt, boolean abbruch)
 	{
 		if(!bewegt)
-			return ziel.existent && chara.abstand(ziel) <= 2 && InnenRaum.von(ziel).rein(chara);
+			return ziel.existent && chara.abstand(ziel) <= 2 && chara.auf.versende(ziel, chara);
 		return null;
 	}
 }

@@ -24,6 +24,7 @@ public class MultiOption extends UITeil
 		}
 	}
 
+	@Override
 	public int weg()
 	{
 		for(int i = 0; i < in.size(); i++)
