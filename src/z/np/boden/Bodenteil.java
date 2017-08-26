@@ -12,9 +12,9 @@ import z.np.transfer.*;
 
 public class Bodenteil extends Feld implements MaterieTransferer, ItemTransferer
 {
-	public static final int fluidKapazitaet = 16;
+	public static final long fluidKapazitaet = 16;
 
-	FluidG fluidG;
+	public FluidG fluidG;
 	Item bItem;
 	Materie wand;
 
@@ -49,6 +49,8 @@ public class Bodenteil extends Feld implements MaterieTransferer, ItemTransferer
 	@Override
 	public Color farbe()
 	{
+		if(fluidG != null)
+			return new Color(20, 20, 60);
 		return new Color(50, 50, 0);
 	}
 

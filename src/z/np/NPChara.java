@@ -4,6 +4,7 @@ import auftrag.*;
 import idk.*;
 import interf.*;
 import java.util.*;
+import karte.*;
 import mark.*;
 import pfadfind.*;
 import z.np.boden.*;
@@ -140,6 +141,7 @@ public class NPChara extends KChara<NPKarte> implements EnergieTransferer, Mater
 	public ArrayList<int[]> tasten1()
 	{
 		ArrayList<int[]> re = new ArrayList<>();
+		re.add(new int[]{71});
 		return re;
 	}
 
@@ -147,6 +149,11 @@ public class NPChara extends KChara<NPKarte> implements EnergieTransferer, Mater
 	public ArrayList<Exec> optionen1()
 	{
 		ArrayList<Exec> re = new ArrayList<>();
+		if(auf.fliese(x, y).fluidG == null)
+			re.add(new Exec("Graben", c ->
+					((KChara) c).extraAuftrag(new Graben(((KObjekt<NPKarte>) c).auf.fliese(c.ort().x, c.ort().y))), this));
+		else
+			re.add(null);
 		return re;
 	}
 
@@ -155,6 +162,7 @@ public class NPChara extends KChara<NPKarte> implements EnergieTransferer, Mater
 	{
 		ArrayList<int[]> re = new ArrayList<>();
 		re.add(new int[]{72, 201});
+		re.add(new int[]{71});
 		return re;
 	}
 
@@ -171,12 +179,14 @@ public class NPChara extends KChara<NPKarte> implements EnergieTransferer, Mater
 				c1.extraAuftrag(new FolgeZiel(h1, 2, new BetreteZiel(h1)));
 			}, this, m1));
 		}
-		else if(m1 instanceof Bodenteil)
-		{
-			if(auf.begehbar(new KOrt(m1.ort(), this), this))
+		else if(m1 instanceof Bodenteil && auf.begehbar(new KOrt(m1.ort(), this), this))
 				re.add(new Exec("Hingehen", (c, b) ->
 						((KChara) c).extraAuftrag(new GeheZuZiel(b.ort().koord(), 0)), this, m1));
-		}
+		else
+			re.add(null);
+		if(m1 instanceof Bodenteil && auf.begehbar(new KOrt(m1.ort(), this), this) && ((Bodenteil) m1).fluidG == null)
+			re.add(new Exec("Graben", (c, b) ->
+					((KChara) c).extraAuftrag(new GeheZuZiel(b.ort().koord(), 0, new Graben((Bodenteil) b))), this, m1));
 		else
 			re.add(null);
 		return re;

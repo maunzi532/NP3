@@ -18,6 +18,13 @@ public class FluidG implements MaterieTransferer
 		inhalt = new HashMap<>();
 	}
 
+	public FluidG(Bodenteil teil)
+	{
+		teile = new ArrayList<>();
+		teile.add(teil);
+		inhalt = new HashMap<>();
+	}
+
 	public FluidG replace()
 	{
 		if(replace == null)
