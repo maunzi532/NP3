@@ -1,6 +1,7 @@
 package z.np;
 
 import auftrag.*;
+import idk.*;
 import interf.*;
 import java.util.*;
 import mark.*;
@@ -136,9 +137,9 @@ public class NPChara extends KChara<NPKarte> implements EnergieTransferer, Mater
 
 	//TODO
 	@Override
-	public ArrayList<Integer> tasten1()
+	public ArrayList<int[]> tasten1()
 	{
-		ArrayList<Integer> re = new ArrayList<>();
+		ArrayList<int[]> re = new ArrayList<>();
 		return re;
 	}
 
@@ -150,10 +151,10 @@ public class NPChara extends KChara<NPKarte> implements EnergieTransferer, Mater
 	}
 
 	@Override
-	public ArrayList<Integer> tasten2(Markierbar m1)
+	public ArrayList<int[]> tasten2(Markierbar m1)
 	{
-		ArrayList<Integer> re = new ArrayList<>();
-		re.add(72);
+		ArrayList<int[]> re = new ArrayList<>();
+		re.add(new int[]{72, 201});
 		return re;
 	}
 
@@ -169,6 +170,12 @@ public class NPChara extends KChara<NPKarte> implements EnergieTransferer, Mater
 				Haus h1 = (Haus) h;
 				c1.extraAuftrag(new FolgeZiel(h1, 2, new BetreteZiel(h1)));
 			}, this, m1));
+		}
+		else if(m1 instanceof Bodenteil)
+		{
+			if(auf.begehbar(new KOrt(m1.ort(), this), this))
+				re.add(new Exec("Hingehen", (c, b) ->
+						((KChara) c).extraAuftrag(new GeheZuZiel(b.ort().koord(), 0)), this, m1));
 		}
 		else
 			re.add(null);

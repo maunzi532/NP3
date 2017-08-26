@@ -36,6 +36,7 @@ public class Portal extends KObjekt implements CharaTransferer
 		chara.x = zielort.x;
 		chara.y = zielort.y;
 		chara.auf = auf1;
+		chara.existent = true;
 		auf1.charas.add(chara);
 		auf1.add.add(chara);
 		return true;

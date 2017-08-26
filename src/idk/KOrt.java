@@ -1,5 +1,7 @@
 package idk;
 
+import pfadfind.*;
+
 public class KOrt
 {
 	public int x, y, xg, yg;
@@ -12,12 +14,17 @@ public class KOrt
 		this.yg = yg;
 	}
 
-	public KOrt(KOrt k)
+	public KOrt(KOrt k1, KOrt k2)
 	{
-		this.x = k.x;
-		this.y = k.y;
-		this.xg = k.xg;
-		this.yg = k.yg;
+		this.x = k1.x;
+		this.y = k1.y;
+		this.xg = k2.xg;
+		this.yg = k2.yg;
+	}
+
+	public Koordinate koord()
+	{
+		return new Koordinate(x, y);
 	}
 
 	public int abstand(KOrt k)

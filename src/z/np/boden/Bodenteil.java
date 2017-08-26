@@ -112,7 +112,7 @@ public class Bodenteil extends Feld implements MaterieTransferer, ItemTransferer
 
 	//TODO
 	@Override
-	public ArrayList<Integer> tasten1()
+	public ArrayList<int[]> tasten1()
 	{
 		return new ArrayList<>();
 	}
@@ -124,7 +124,7 @@ public class Bodenteil extends Feld implements MaterieTransferer, ItemTransferer
 	}
 
 	@Override
-	public ArrayList<Integer> tasten2(Markierbar m1)
+	public ArrayList<int[]> tasten2(Markierbar m1)
 	{
 		return new ArrayList<>();
 	}

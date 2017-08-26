@@ -17,11 +17,12 @@ public class NMark extends Mark
 		{
 			if(fokus.marked != null && fokus.marked != hover.marked)
 			{
-				ArrayList<Integer> t1 = fokus.marked.tasten2(hover.marked);
+				ArrayList<int[]> t1 = fokus.marked.tasten2(hover.marked);
 				int i = 0;
-				for(; i < t1.size(); i++)
-					if(t1.get(i) != null && TA.take[t1.get(i)] == 2)
-						break;
+				label68: for(; i < t1.size(); i++)
+					for(int j = 0; j < t1.get(i).length; j++)
+						if(TA.take[t1.get(i)[j]] == (t1.get(i)[j] == 201 ? -1 : 2))
+							break label68;
 				if(i < t1.size() || TA.take[201] == 2)
 				{
 					ArrayList<Exec> optionen = fokus.marked.optionen2(hover.marked);
@@ -46,11 +47,12 @@ public class NMark extends Mark
 			}
 			else
 			{
-				ArrayList<Integer> t1 = hover.marked.tasten1();
+				ArrayList<int[]> t1 = hover.marked.tasten1();
 				int i = 0;
-				for(; i < t1.size(); i++)
-					if(t1.get(i) != null && TA.take[t1.get(i)] == 2)
-						break;
+				label68: for(; i < t1.size(); i++)
+					for(int j = 0; j < t1.get(i).length; j++)
+						if(TA.take[t1.get(i)[j]] == 2)
+							break label68;
 				if(i < t1.size() || TA.take[201] == 2 || TA.take[202] == 2)
 				{
 					ArrayList<Exec> optionen = hover.marked.optionen1();

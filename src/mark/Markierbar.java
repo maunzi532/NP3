@@ -13,7 +13,7 @@ public interface Markierbar
 
 	boolean weg();
 
-	default ArrayList<Integer> tasten1()
+	default ArrayList<int[]> tasten1()
 	{
 		return new ArrayList<>();
 	}
@@ -23,7 +23,7 @@ public interface Markierbar
 		return new ArrayList<>();
 	}
 
-	default ArrayList<Integer> tasten2(Markierbar m1)
+	default ArrayList<int[]> tasten2(Markierbar m1)
 	{
 		return new ArrayList<>();
 	}
