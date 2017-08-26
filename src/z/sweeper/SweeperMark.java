@@ -2,6 +2,7 @@ package z.sweeper;
 
 import idk.*;
 import karte.*;
+import mark.*;
 import pfadfind.*;
 
 public class SweeperMark extends Mark

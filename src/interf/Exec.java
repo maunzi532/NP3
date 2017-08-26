@@ -1,7 +1,7 @@
 package interf;
 
-import idk.*;
 import java.util.function.*;
+import mark.*;
 
 public class Exec
 {

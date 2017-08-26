@@ -3,6 +3,7 @@ package auftrag;
 import idk.*;
 import interf.*;
 import java.util.*;
+import mark.*;
 
 public class Nachfrage extends Auftrag
 {
@@ -43,6 +44,7 @@ public class Nachfrage extends Auftrag
 		if(ender.weg > 0)
 		{
 			XKarte.mark.ziel.marked = null;
+			XKarte.mark.fokus.marked = null;
 			return true;
 		}
 		return null;

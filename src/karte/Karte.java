@@ -2,6 +2,7 @@ package karte;
 
 import idk.*;
 import java.util.*;
+import mark.*;
 
 public abstract class Karte<T extends Feld>
 {

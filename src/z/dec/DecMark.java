@@ -2,6 +2,7 @@ package z.dec;
 
 import idk.*;
 import karte.*;
+import mark.*;
 import z.dec.duell.*;
 
 public class DecMark extends Mark

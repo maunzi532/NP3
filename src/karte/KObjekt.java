@@ -3,6 +3,7 @@ package karte;
 import idk.*;
 import interf.*;
 import java.awt.*;
+import mark.*;
 
 public class KObjekt<T extends Karte> extends KOrt implements Markierbar
 {

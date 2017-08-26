@@ -1,5 +1,6 @@
-package idk;
+package mark;
 
+import idk.*;
 import interf.*;
 import java.util.*;
 import karte.*;

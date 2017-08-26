@@ -4,6 +4,7 @@ import idk.*;
 import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
+import mark.*;
 
 public abstract class Feld implements Markierbar
 {

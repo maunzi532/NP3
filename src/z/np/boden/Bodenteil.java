@@ -1,12 +1,12 @@
 package z.np.boden;
 
-import idk.*;
 import interf.*;
 import java.awt.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
 import karte.*;
+import mark.*;
 import z.np.*;
 import z.np.transfer.*;
 

@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 import karte.*;
+import mark.*;
 
 public class XKarte
 {
