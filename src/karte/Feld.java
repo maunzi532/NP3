@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
 
-public abstract class Feld
+public abstract class Feld implements Markierbar
 {
 	public int x, y;
 
@@ -39,8 +39,32 @@ public abstract class Feld
 		}
 	}
 
+	@Override
+	public KOrt ort()
+	{
+		return new KOrt(x, y, 1, 1);
+	}
+
+	@Override
+	public Karte auf(Karte w)
+	{
+		return w;
+	}
+
+	@Override
+	public boolean weg()
+	{
+		return false;
+	}
+
 	public static Feld LEERE = new Feld()
 	{
+		@Override
+		public boolean weg()
+		{
+			return true;
+		}
+
 		@Override
 		public boolean begehbar(KObjekt wer)
 		{

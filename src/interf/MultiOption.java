@@ -4,7 +4,7 @@ public class MultiOption extends UITeil
 {
 	int lockon;
 
-	public MultiOption(String[] options, int lockon, int cascade, int... location)
+	public MultiOption(Clickbar[] options, int lockon, int cascade, int... location)
 	{
 		super(cascade, location);
 		this.lockon = lockon;
@@ -19,8 +19,9 @@ public class MultiOption extends UITeil
 				ysh2 = 1 + i * 2;
 			else
 				ysh2 = (i - options.length + 1) * 2 - 1;
-			int[] location2 = new int[]{xsh, 1, ysh2, 1, 1, 1, 1, 1};
-			in.add(new MenuItem(options[i], false, 2, location2));
+			options[i].location = new int[]{xsh, 1, ysh2, 1, 1, 1, 1, 1};
+			options[i].cascade = 2;
+			in.add(options[i]);
 		}
 	}
 

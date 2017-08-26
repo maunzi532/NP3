@@ -1,5 +1,7 @@
 package z.np.haus;
 
+import idk.*;
+import interf.*;
 import java.util.*;
 import pfadfind.*;
 import z.np.*;
@@ -136,5 +138,34 @@ public class Haus extends KChara<NPKarte> implements EnergieTransferer, MaterieT
 	{
 		InnenRaum ir = InnenRaum.von(this);
 		return ir != null ? ir.maxCharas() : 0;
+	}
+
+	//TODO
+	@Override
+	public ArrayList<Integer> tasten1()
+	{
+		ArrayList<Integer> re = new ArrayList<>();
+		re.add(77);
+		return re;
+	}
+
+	@Override
+	public ArrayList<Exec> optionen1()
+	{
+		ArrayList<Exec> re = new ArrayList<>();
+		re.add(new Exec("Info", h -> XKarte.gui.add(new UIAnschluss(0, 0, new HausGUI((Haus) h))), this));
+		return re;
+	}
+
+	@Override
+	public ArrayList<Integer> tasten2(Markierbar m1)
+	{
+		return new ArrayList<>();
+	}
+
+	@Override
+	public ArrayList<Exec> optionen2(Markierbar m1)
+	{
+		return new ArrayList<>();
 	}
 }

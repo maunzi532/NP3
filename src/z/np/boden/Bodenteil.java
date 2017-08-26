@@ -1,5 +1,7 @@
 package z.np.boden;
 
+import idk.*;
+import interf.*;
 import java.awt.*;
 import java.io.*;
 import java.util.*;
@@ -106,5 +108,30 @@ public class Bodenteil extends Feld implements MaterieTransferer, ItemTransferer
 	public long maxItems()
 	{
 		return 1;
+	}
+
+	//TODO
+	@Override
+	public ArrayList<Integer> tasten1()
+	{
+		return new ArrayList<>();
+	}
+
+	@Override
+	public ArrayList<Exec> optionen1()
+	{
+		return new ArrayList<>();
+	}
+
+	@Override
+	public ArrayList<Integer> tasten2(Markierbar m1)
+	{
+		return new ArrayList<>();
+	}
+
+	@Override
+	public ArrayList<Exec> optionen2(Markierbar m1)
+	{
+		return new ArrayList<>();
 	}
 }

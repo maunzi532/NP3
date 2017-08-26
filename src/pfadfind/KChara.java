@@ -44,6 +44,17 @@ public class KChara<T extends Karte> extends KObjekt<T>
 			abbruch = false;
 	}
 
+	public void extraAuftrag(Auftrag auftrag1)
+	{
+		if(auftrag != null)
+			auftrag.danach = auftrag1;
+		else
+		{
+			auftrag = auftrag1;
+			auftrag1.an(this);
+		}
+	}
+
 	public void pfad(Koordinate dest, int abstand)
 	{
 		ArrayList<Koordinate> dest1 = new ArrayList<>();

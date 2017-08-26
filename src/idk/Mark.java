@@ -10,7 +10,7 @@ public abstract class Mark
 	public Marker ziel;
 	public Marker hover;
 
-	public ArrayList<KObjekt> hoverliste = new ArrayList<>();
+	public ArrayList<Markierbar> hoverliste = new ArrayList<>();
 	public int hoverausw = -1;
 
 	public Mark()
@@ -22,71 +22,44 @@ public abstract class Mark
 
 	public void mdk(int nx, int ny, Karte aktuell)
 	{
+		if(fokus.marked != null && fokus.marked.weg())
+			fokus.marked = null;
+		if(ziel.marked != null && ziel.marked.weg())
+			ziel.marked = null;
 		if(aktuell != null)
 		{
 			hover(nx, ny, aktuell);
-			if(TA.take[201] == 2)
-			{
-				if(getHoverAusw() != null)
-					fokus.marked = getHoverAusw();
-				else
-				{
-					fokus.auf = hover.auf;
-					fokus.marked = null;
-					fokus.x = hover.x;
-					fokus.y = hover.y;
-				}
-				fokus.existent = true;
-			}
-			if(TA.take[203] == 2)
-			{
-				if(getHoverAusw() != null)
-					ziel.marked = getHoverAusw();
-				else
-				{
-					ziel.auf = hover.auf;
-					ziel.marked = null;
-					ziel.x = hover.x;
-					ziel.y = hover.y;
-				}
-				ziel.existent = true;
-			}
+			mdk1();
 		}
 		else
-			hover.existent = false;
+			hover.marked = null;
 	}
+
+	public abstract void mdk1();
 
 	public void hover(int nx, int ny, Karte aktuell)
 	{
-		if(aktuell != hover.auf || nx != hover.x || ny != hover.y)
+		if(getHoverAusw() == null || aktuell != getHoverAusw().auf(aktuell) || nx != getHoverAusw().ort().x || ny != getHoverAusw().ort().y)
 		{
-			hover.existent = true;
-			hover.auf = aktuell;
 			hoverliste = aktuell.hier(nx, ny);
-			hover.x = nx;
-			hover.y = ny;
 			hoverausw = hoverliste.size() - 1;
-			hover.marked = getHoverAusw();
 		}
 		else
 		{
-			hoverliste.removeIf(k -> !k.existent);
+			hoverliste.removeIf(Markierbar::weg);
 			if(hoverausw >= hoverliste.size())
 				hoverausw = hoverliste.size() - 1;
 		}
 		if(TA.take[66] == 2)
 		{
 			hoverausw--;
-			if(hoverausw < -1)
+			if(hoverausw < 0)
 				hoverausw = hoverliste.size() - 1;
 		}
-		if(hoverausw >= 0)
-			hover.marked = hoverliste.get(hoverausw);
-		else
-			hover.marked = null;
+		hover.marked = getHoverAusw();
 	}
 
-	public KObjekt getHoverAusw()
+	public Markierbar getHoverAusw()
 	{
 		if(hoverausw < 0)
 			return null;
@@ -95,49 +68,49 @@ public abstract class Mark
 
 	public KOrt mitFokus(Marker m)
 	{
-		if(fokus.existent && fokus.marked != null)
-			return new KOrt(m.x, m.y, fokus.marked.xg, fokus.marked.yg);
-		return new KOrt(m.x, m.y, 1, 1);
+		if(fokus.marked != null && fso())
+			return new KOrt(m.marked.ort().x, m.marked.ort().y, fokus.marked.ort().xg, fokus.marked.ort().yg);
+		return m.marked.ort();
 	}
 
 	public abstract void verarbeite();
 
+	public boolean fso()
+	{
+		return true;
+	}
+
 	public void zeichne(Graphics2D gd, Karte ak, PlD d)
 	{
 		zeichne(gd, hover, ak, d);
-		zeichne(gd, fokus, ak, d);
 		zeichne(gd, ziel, ak, d);
+		zeichne(gd, fokus, ak, d);
 	}
 
 	public void zeichne(Graphics2D gd, Marker m, Karte ak, PlD d)
 	{
-		if(m.existent && m.getAuf() == ak)
+		if(m.marked != null && m.marked.auf(ak) == ak)
 		{
-			int mx, my;
+			KOrt mk = m.marked.ort();
 			int msx = 0;
 			int msy = 0;
 			int mxg = 1;
 			int myg = 1;
-			if(m.marked != null)
+			if(m.marked instanceof KObjekt)
 			{
-				mx = m.marked.x;
-				my = m.marked.y;
-				msx = m.marked.sx;
-				msy = m.marked.sy;
-				mxg = m.marked.xg;
-				myg = m.marked.yg;
+				KObjekt m1 = (KObjekt) m.marked;
+				msx = m1.sx;
+				msy = m1.sy;
+				mxg = m1.xg;
+				myg = m1.yg;
 			}
-			else
+			else if(fso() && fokus.marked instanceof  KObjekt)
 			{
-				mx = m.x;
-				my = m.y;
-				if(fokus.existent && fokus.marked != null)
-				{
-					mxg = fokus.marked.xg;
-					myg = fokus.marked.yg;
-				}
+				KObjekt f1 = (KObjekt) fokus.marked;
+				mxg = f1.xg;
+				myg = f1.yg;
 			}
-			zeichne(gd, d.xort(mx, msx), d.yort(my, msy), d.xdfw, d.ydfw, mxg, myg, m.farbe);
+			zeichne(gd, d.xort(mk.x, msx), d.yort(mk.y, msy), d.xdfw, d.ydfw, mxg, myg, m.farbe);
 		}
 	}
 

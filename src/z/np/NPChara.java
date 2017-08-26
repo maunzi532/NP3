@@ -1,5 +1,8 @@
 package z.np;
 
+import auftrag.*;
+import idk.*;
+import interf.*;
 import java.util.*;
 import pfadfind.*;
 import z.np.boden.*;
@@ -129,5 +132,46 @@ public class NPChara extends KChara<NPKarte> implements EnergieTransferer, Mater
 	public long maxItems()
 	{
 		return itemlimit;
+	}
+
+	//TODO
+	@Override
+	public ArrayList<Integer> tasten1()
+	{
+		ArrayList<Integer> re = new ArrayList<>();
+		return re;
+	}
+
+	@Override
+	public ArrayList<Exec> optionen1()
+	{
+		ArrayList<Exec> re = new ArrayList<>();
+		return re;
+	}
+
+	@Override
+	public ArrayList<Integer> tasten2(Markierbar m1)
+	{
+		ArrayList<Integer> re = new ArrayList<>();
+		re.add(72);
+		return re;
+	}
+
+	@Override
+	public ArrayList<Exec> optionen2(Markierbar m1)
+	{
+		ArrayList<Exec> re = new ArrayList<>();
+		if(m1 instanceof Haus)
+		{
+			re.add(new Exec("Betreten", (c, h) ->
+			{
+				KChara c1 = (KChara) c;
+				Haus h1 = (Haus) h;
+				c1.extraAuftrag(new FolgeZiel(h1, 2, new BetreteZiel(h1)));
+			}, this, m1));
+		}
+		else
+			re.add(null);
+		return re;
 	}
 }

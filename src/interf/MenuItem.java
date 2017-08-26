@@ -8,6 +8,13 @@ public class MenuItem extends Clickbar
 	boolean center;
 	boolean focused;
 
+	public MenuItem(String text, boolean center)
+	{
+		super();
+		this.text = text;
+		this.center = center;
+	}
+
 	public MenuItem(String text, boolean center, int cascade, int... location)
 	{
 		super(cascade, location);
@@ -19,7 +26,7 @@ public class MenuItem extends Clickbar
 	public void onClick(int n)
 	{
 		if(cascade > 0)
-			weg = 1;
+			weg = 2 - n;
 	}
 
 	@Override

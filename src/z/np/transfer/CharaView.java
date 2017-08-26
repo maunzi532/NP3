@@ -17,6 +17,7 @@ public class CharaView extends UITeil
 		List<NPChara> charas = transferer.zeigeCharas();
 		if(charas == null)
 			charas = new ArrayList<>();
+		code = charas.hashCode();
 		area = new ItemArea<>(charas, conv, 2, 3, 0, 0, 1, 0, 1, 1, 3, 1, 2);
 		in.add(area);
 	}

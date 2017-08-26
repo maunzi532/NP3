@@ -77,6 +77,7 @@ public class NPKarte extends Karte<Bodenteil> implements CharaTransferer
 			return false;
 		if(real)
 		{
+			chara.existent = false;
 			charas.remove(chara);
 			rem.add(chara);
 		}
@@ -121,6 +122,7 @@ public class NPKarte extends Karte<Bodenteil> implements CharaTransferer
 			chara.y = zielort.y;
 			chara.inHaus = null;
 			chara.auf = this;
+			chara.existent = true;
 			charas.add(chara);
 			add.add(chara);
 		}

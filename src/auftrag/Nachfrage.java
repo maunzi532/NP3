@@ -3,22 +3,22 @@ package auftrag;
 import idk.*;
 import interf.*;
 import java.util.*;
-import karte.*;
 
-public class Nachfrage<T extends KObjekt> extends Auftrag
+public class Nachfrage extends Auftrag
 {
-	T ziel;
-	ArrayList<Exec<T>> optionen;
+	Markierbar ziel;
+	Markierbar marked;
+	ArrayList<Exec> optionen;
+	boolean added;
+	UITeil ender;
 
-	public Nachfrage(T ziel, ArrayList<Exec<T>> optionen)
+	public Nachfrage(ArrayList<Exec> optionen)
 	{
-		this.ziel = ziel;
 		this.optionen = optionen;
 	}
 
-	public Nachfrage(T ziel, ArrayList<Exec<T>> optionen, Auftrag danach)
+	public Nachfrage(Markierbar ziel, ArrayList<Exec> optionen)
 	{
-		super(danach);
 		this.ziel = ziel;
 		this.optionen = optionen;
 	}
@@ -26,8 +26,25 @@ public class Nachfrage<T extends KObjekt> extends Auftrag
 	@Override
 	public Boolean los(boolean bewegt, boolean abbruch)
 	{
-		XKarte.gui.add(new UIAnschluss(XKarte.aktuell, ziel, 1, -1,
-				new VariableOption(optionen, 3, 2, 0, 1, 0, 1, 2, 1, 1, 2)));
-		return true;
+		if(!added)
+		{
+			marked = ziel != null ? ziel : chara;
+			XKarte.mark.ziel.marked = marked;
+			XKarte.mark.ziel.taken = this;
+			ender = new VariableOption(optionen, 3, 2, 0, 1, 0, 1, 2, 1, 1, 2);
+			XKarte.gui.add(new UIAnschluss(XKarte.aktuell, ziel != null ? ziel.ort() : chara.ort(), 1, -1, ender));
+			added = true;
+		}
+		if(XKarte.mark.ziel.taken != this)
+		{
+			ender.weg = 1;
+			return false;
+		}
+		if(ender.weg > 0)
+		{
+			XKarte.mark.ziel.marked = null;
+			return true;
+		}
+		return null;
 	}
 }

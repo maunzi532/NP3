@@ -71,7 +71,9 @@ public class XKarte
 				taken = true;
 		for(Clickbar cl1 : cl)
 			cl1.onFokus();
-		gui.removeIf(UIAnschluss::weg);
+		for(int i = 0; i < gui.size(); i++)
+			if(gui.get(i).weg())
+				gui.remove(i--);
 		int xcal = d.xcal(xp);
 		int ycal = d.ycal(yp);
 		if(aktuell != null && !taken && xcal >= 0 && ycal >= 0 && xcal < aktuell.xw * d.fwx && ycal < aktuell.yw * d.fwy)

@@ -1,27 +1,36 @@
 package interf;
 
+import idk.*;
 import java.util.function.*;
 
-public class Exec<T>
+public class Exec
 {
 	public String name;
-	public Consumer<T> exec;
-	public T wer;
+	public Consumer<Markierbar> exec;
+	public BiConsumer<Markierbar, Markierbar> exec2;
+	public Markierbar wer;
+	public Markierbar wer2;
 
-	public Exec(String name, Consumer<T> exec, T wer)
+	public Exec(String name, Consumer<Markierbar> exec, Markierbar wer)
 	{
 		this.name = name;
 		this.exec = exec;
 		this.wer = wer;
 	}
 
-	public void los()
+	public Exec(String name, BiConsumer<Markierbar, Markierbar> exec2, Markierbar wer, Markierbar wer2)
 	{
-		exec.accept(wer);
+		this.name = name;
+		this.exec2 = exec2;
+		this.wer = wer;
+		this.wer2 = wer2;
 	}
 
-	public String name()
+	public void los()
 	{
-		return name;
+		if(exec != null)
+			exec.accept(wer);
+		else
+			exec2.accept(wer, wer2);
 	}
 }

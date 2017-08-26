@@ -39,9 +39,12 @@ public abstract class Karte<T extends Feld>
 		return true;
 	}
 
-	public ArrayList<KObjekt> hier(int x, int y)
+	public ArrayList<Markierbar> hier(int x, int y)
 	{
-		ArrayList<KObjekt> re = new ArrayList<>();
+		ArrayList<Markierbar> re = new ArrayList<>();
+		if(fliese(x, y).weg())
+			return re;
+		re.add(fliese(x, y));
 		for(KObjekt k : objekte)
 			if(k.existent && k.anzielbar && overlap(new KOrt(x, y, 1, 1), k))
 				re.add(k);

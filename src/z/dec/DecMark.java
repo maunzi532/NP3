@@ -1,11 +1,7 @@
 package z.dec;
 
-import auftrag.*;
 import idk.*;
-import interf.*;
-import java.util.*;
 import karte.*;
-import pfadfind.*;
 import z.dec.duell.*;
 
 public class DecMark extends Mark
@@ -23,9 +19,18 @@ public class DecMark extends Mark
 	}
 
 	@Override
+	public void mdk1()
+	{
+		if(TA.take[201] == 2)
+			fokus.marked = hover.marked;
+		if(TA.take[203] == 2)
+			ziel.marked = hover.marked;
+	}
+
+	@Override
 	public void verarbeite()
 	{
-		if(duell != null)
+		/*if(duell != null)
 			duell.tick();
 		if(XKarte.aktuell == null)
 			return;
@@ -49,6 +54,6 @@ public class DecMark extends Mark
 			else if(XKarte.aktuell.begehbar(mitFokus(ziel), fokus.marked))
 				new GeheZuZiel(new Koordinate(ziel.x, ziel.y), 0).an((KChara) fokus.marked);
 			ziel.existent = false;
-		}
+		}*/
 	}
 }
