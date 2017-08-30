@@ -32,11 +32,11 @@ public class XKarte
 	{
 		if(aktuell != null)
 		{
-			kamx = aktuell.xw * fwx / 2;
-			kamy = aktuell.yw * fwy / 2;
+			kamx = (aktuell.xw - 1) * fwx / 2;
+			kamy = (aktuell.yw - 1) * fwy / 2;
 		}
-		xdfw = 50;
-		ydfw = 50;
+		xdfw = 80;
+		ydfw = 80;
 	}
 
 	public static void tick(Graphics2D gd, int xw, int yw, int xp, int yp)
@@ -87,8 +87,8 @@ public class XKarte
 	{
 		if(aktuell != null)
 		{
-			for(int xi = -d.sichtx - 1; xi <= d.sichtx + 1; xi++)
-				for(int yi = -d.sichty - 1; yi <= d.sichty + 1; yi++)
+			for(int xi = -d.sichtx; xi <= d.sichtx; xi++)
+				for(int yi = -d.sichty; yi <= d.sichty; yi++)
 					aktuell.fliese(d.xkm + xi, d.ykm + yi).zeichne(gd,
 							d.xks2 + d.xdfw * xi, d.yks2 + d.ydfw * yi, d.xdfw, d.ydfw);
 			for(int i = 0; i < aktuell.objekte.size(); i++)

@@ -20,9 +20,8 @@ public class FluidG implements MaterieTransferer
 
 	public FluidG(Bodenteil teil)
 	{
-		teile = new ArrayList<>();
+		this();
 		teile.add(teil);
-		inhalt = new HashMap<>();
 	}
 
 	public FluidG replace()
@@ -117,6 +116,8 @@ public class FluidG implements MaterieTransferer
 		neu.teile.addAll(a.teile);
 		neu.inhalt.putAll(inhalt);
 		a.inhalt.forEach((mat, m) -> neu.inhalt.merge(mat, m, Long::sum));
+		neu.solidMenge = solidMenge + a.solidMenge;
+		neu.fluidMenge = fluidMenge + a.fluidMenge;
 		return neu;
 	}
 }

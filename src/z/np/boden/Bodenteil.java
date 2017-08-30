@@ -50,7 +50,11 @@ public class Bodenteil extends Feld implements MaterieTransferer, ItemTransferer
 	public Color farbe()
 	{
 		if(fluidG != null)
+		{
+			if(fluidG.tiefe() > 0)
+				return new Color(80, 0, 120);
 			return new Color(20, 20, 60);
+		}
 		return new Color(50, 50, 0);
 	}
 

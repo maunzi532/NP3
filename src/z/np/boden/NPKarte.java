@@ -27,10 +27,14 @@ public class NPKarte extends Karte<Bodenteil> implements CharaTransferer
 			{
 				Bodenteil f = new Bodenteil(x, y);
 				fliesen[x][y] = f;
+				if((x == 5 || x == 6) && y == 1)
+				{
+					f.fluidG = new FluidG(f);
+					f.fluidG.acceptMaterie(new Materie(MaterieTyp.WASSER, 16), true);
+				}
 				if(f.fluidG != null)
 					pools.add(f.fluidG);
 			}
-
 	}
 
 	@Override
@@ -67,7 +71,7 @@ public class NPKarte extends Karte<Bodenteil> implements CharaTransferer
 			x += r - 1;
 		if(r > 0)
 			y += r - 2;
-		return fliesen[x][y].fluidG;
+		return fliese(x, y).fluidG;
 	}
 
 	@Override
