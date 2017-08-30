@@ -9,16 +9,16 @@ import z.np.transfer.*;
 
 public class NPKarte extends Karte<Bodenteil> implements CharaTransferer
 {
-	int level;
+	public int level;
 	public ArrayList<FluidG> pools;
 	public List<NPChara> charas;
-	public Portal portal;
+	public Schichten schichten;
 
-	public NPKarte(int level, int xw, int yw, Portal portal)
+	public NPKarte(int level, int xw, int yw, Schichten schichten)
 	{
 		super(xw, yw);
 		this.level = level;
-		this.portal = portal;
+		this.schichten = schichten;
 		fliesen = new Bodenteil[xw][yw];
 		pools = new ArrayList<>();
 		charas = new ArrayList<>();
@@ -63,6 +63,8 @@ public class NPKarte extends Karte<Bodenteil> implements CharaTransferer
 		for(int x = 0; x < xw; x++)
 			for(int y = 0; y < yw; y++)
 				fliesen[x][y].tick();
+		if(this == XKarte.aktuell && TA.take[65] == 2)
+			KarteSwitcher.switchto(schichten.karte(level - 1), true);
 	}
 
 	public FluidG surroundcheckNewField(int x, int y, int r)

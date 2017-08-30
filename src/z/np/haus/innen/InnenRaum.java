@@ -31,7 +31,7 @@ public class InnenRaum extends InnenTeil implements CharaTransferer
 	{
 		NPChara chara = charas.remove(num);
 		if(!von.auf.acceptChara(chara, true))
-			von.auf.portal.acceptChara(chara, true);
+			von.auf.schichten.portal.acceptChara(chara, true);
 	}
 
 	@Override

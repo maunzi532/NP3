@@ -58,7 +58,8 @@ public class XKarte
 				k.tick();
 		else if(aktuell != null)
 			aktuell.tick();
-		aufzeichnen(gd);
+		KarteSwitcher.tick();
+		KarteSwitcher.aufzeichnen(gd, xw, yw);
 		if(aktuell != null)
 			kamera();
 	}
@@ -83,30 +84,34 @@ public class XKarte
 			mark.mdk(-1, -1, null);
 	}
 
-	public static void aufzeichnen(Graphics2D gd)
+	public static void aufzeichnen(Graphics2D gd, Karte k, boolean drawgui)
 	{
-		if(aktuell != null)
+		if(k != null)
 		{
 			for(int xi = -d.sichtx; xi <= d.sichtx; xi++)
 				for(int yi = -d.sichty; yi <= d.sichty; yi++)
-					aktuell.fliese(d.xkm + xi, d.ykm + yi).zeichne(gd,
+					k.fliese(d.xkm + xi, d.ykm + yi).zeichne(gd,
 							d.xks2 + d.xdfw * xi, d.yks2 + d.ydfw * yi, d.xdfw, d.ydfw);
-			for(int i = 0; i < aktuell.objekte.size(); i++)
+			for(int i = 0; i < k.objekte.size(); i++)
 			{
-				KObjekt c = (KObjekt) aktuell.objekte.get(i);
+				KObjekt c = (KObjekt) k.objekte.get(i);
 				if(c.existent && c.x + 1 >= d.xkm - d.sichtx && c.y + 1 >= d.ykm - d.sichty
 						&& c.x + c.xg - 1 <= d.xkm + d.sichtx && c.y + c.yg - 1 <= d.ykm + d.sichty)
 					c.zeichne(gd, d.xort(c.x, c.sx), d.yort(c.y, c.sy), d.xdfw, d.ydfw);
 			}
-			mark.zeichne(gd, aktuell, d);
 		}
 		else
 		{
 			gd.setColor(Color.BLACK);
 			gd.fillRect(0, 0, d.xw, d.yw);
 		}
-		for(int i = gui.size() - 1; i >= 0; i--)
-			gui.get(i).aufzeichnen(gd, d);
+		if(drawgui)
+		{
+			if(k != null)
+			mark.zeichne(gd, k, d);
+			for(int i = gui.size() - 1; i >= 0; i--)
+				gui.get(i).aufzeichnen(gd, d);
+		}
 	}
 
 	public static void kamera()

@@ -21,7 +21,7 @@ public class HausGUIChara extends Clickbar
 		if(n == 3)
 		{
 			if(!h.versende(h.auf, wer))
-				h.versende(h.auf.portal, wer);
+				h.versende(h.auf.schichten.portal, wer);
 		}
 	}
 }

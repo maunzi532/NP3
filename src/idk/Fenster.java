@@ -45,7 +45,7 @@ public class Fenster
 			if(fenster.getContentPane().getWidth() != flaeche.width || fenster.getContentPane().getHeight() != flaeche.height)
 			{
 				flaeche = fenster.getContentPane().getSize();
-				bild = new BufferedImage(flaeche.width, flaeche.height, BufferedImage.TYPE_INT_ARGB_PRE);
+				bild = new BufferedImage(flaeche.width, flaeche.height, BufferedImage.TYPE_INT_RGB);
 				gd = bild.createGraphics();
 			}
 			/*long time2 = System.currentTimeMillis();
