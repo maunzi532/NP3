@@ -35,7 +35,10 @@ public class KChara<T extends Karte> extends KObjekt<T>
 				if(re && auftrag.danach != null)
 					auftrag.danach.an(this);
 				else
+				{
+					auftrag.ende();
 					auftrag = null;
+				}
 			}
 		}
 		if(aks >= 0)

@@ -2,13 +2,13 @@ package idk;
 
 public class PlD
 {
-	public int xw, yw, fwx, fwy, sichtx, sichty, kamx, kamy;
-	public int xdfw, ydfw, xkm, ykm, xks, yks, xks2, yks2;
+	public int xw, yw, fwx, fwy, xdfw, ydfw, kamx, kamy;
+	public int sichtx, sichty, xkm, ykm, xks, yks, xks2, yks2;
 
 	public void calc()
 	{
-		xdfw = xw / 2 / sichtx;
-		ydfw = yw / 2 / sichty;
+		sichtx = xw / 2 / xdfw + 1;
+		sichty = yw / 2 / ydfw + 1;
 		xkm = (kamx + fwx / 2) / fwx;
 		ykm = (kamy + fwy / 2) / fwy;
 		xks = (kamx - xkm * fwx) * xdfw / fwx;
@@ -39,11 +39,11 @@ public class PlD
 
 	public int xcal(int xp)
 	{
-		return (xp - xw / 2) * fwx * 2 * sichtx / xw + kamx + fwx / 2;
+		return (xp - xw / 2) * fwx / xdfw + kamx + fwx / 2;
 	}
 
 	public int ycal(int yp)
 	{
-		return (yp - yw / 2) * fwy * 2 * sichty / yw + kamy + fwy / 2;
+		return (yp - yw / 2) * fwy / ydfw + kamy + fwy / 2;
 	}
 }

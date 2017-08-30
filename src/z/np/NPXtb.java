@@ -2,6 +2,7 @@ package z.np;
 
 import idk.*;
 import java.util.*;
+import karte.*;
 import mark.*;
 import z.np.boden.*;
 import z.np.haus.*;
@@ -19,6 +20,9 @@ public class NPXtb extends Xtb
 			k.objekte.add(new NPChara(i, 2, 1, 1, true, true, k));
 		for(int i = 0; i < k.xw; i++)
 			k.objekte.add(new NPChara(i, 3, 1, 1, true, true, k));
+		for(KObjekt objekt : k.objekte)
+			if(objekt instanceof NPChara)
+				k.charas.add((NPChara) objekt);
 		alleKarten = true;
 		XKarte.mark = new NMark();
 	}

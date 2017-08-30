@@ -37,16 +37,19 @@ public class Nachfrage extends Auftrag
 			added = true;
 		}
 		if(XKarte.mark.ziel.taken != this)
-		{
-			ender.weg = 1;
 			return false;
-		}
-		if(ender.weg > 0)
+		if(ender.weg > 0 || danach != null)
 		{
 			XKarte.mark.ziel.marked = null;
 			XKarte.mark.fokus.marked = null;
 			return true;
 		}
 		return null;
+	}
+
+	@Override
+	public void ende()
+	{
+		ender.weg = 1;
 	}
 }

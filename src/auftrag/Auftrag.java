@@ -19,6 +19,10 @@ public abstract class Auftrag<T extends KChara>
 	public void an(T chara)
 	{
 		this.chara = chara;
+		if(chara.auftrag != null)
+			chara.auftrag.ende();
 		chara.auftrag = this;
 	}
+
+	public void ende(){}
 }

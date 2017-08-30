@@ -17,7 +17,7 @@ public class XKarte
 	public static Texthalter th;
 	public static KObjekt kamLock;
 	public static int kamx, kamy;
-	public static int sichtx, sichty;
+	public static int xdfw, ydfw;
 	public static final int fwx = 20;
 	public static final int fwy = 20;
 	public static PlD d;
@@ -35,8 +35,8 @@ public class XKarte
 			kamx = aktuell.xw * fwx / 2;
 			kamy = aktuell.yw * fwy / 2;
 		}
-		sichtx = 8;
-		sichty = 6;
+		xdfw = 50;
+		ydfw = 50;
 	}
 
 	public static void tick(Graphics2D gd, int xw, int yw, int xp, int yp)
@@ -46,8 +46,8 @@ public class XKarte
 		d.yw = yw;
 		d.fwx = fwx;
 		d.fwy = fwy;
-		d.sichtx = sichtx;
-		d.sichty = sichty;
+		d.xdfw = xdfw;
+		d.ydfw = ydfw;
 		d.kamx = kamx;
 		d.kamy = kamy;
 		d.calc();
