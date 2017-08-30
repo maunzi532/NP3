@@ -60,6 +60,8 @@ public class XKarte
 			aktuell.tick();
 		KarteSwitcher.tick();
 		KarteSwitcher.aufzeichnen(gd, xw, yw);
+		for(int i = gui.size() - 1; i >= 0; i--)
+			gui.get(i).aufzeichnen(gd, d);
 		if(aktuell != null)
 			kamera();
 	}
@@ -105,13 +107,8 @@ public class XKarte
 			gd.setColor(Color.BLACK);
 			gd.fillRect(0, 0, d.xw, d.yw);
 		}
-		if(drawgui)
-		{
-			if(k != null)
+		if(drawgui && k != null)
 			mark.zeichne(gd, k, d);
-			for(int i = gui.size() - 1; i >= 0; i--)
-				gui.get(i).aufzeichnen(gd, d);
-		}
 	}
 
 	public static void kamera()

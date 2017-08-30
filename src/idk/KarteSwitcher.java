@@ -7,20 +7,31 @@ import karte.*;
 
 public class KarteSwitcher
 {
-	public static final int maxD = 20;
-	public static final int abstand = 40;
-	public static final int s2 = 100;
-	public static final int shd = 15;
+	public static final int maxD = 15;
+	public static final int abstand = 20;
+	public static final int s2 = 50;
+	public static final int shd = 8;
 
 	public static ArrayList<Karte> toSwitch;
+	public static boolean changed;
 	public static int distance;
 	public static int cursor;
 	public static int ctarget;
 	public static BufferedImage img;
 	public static Graphics2D gd1;
 
+	public static Karte ctarget()
+	{
+		if(XKarte.aktuell != null)
+			return XKarte.aktuell;
+		if(toSwitch != null)
+			return toSwitch.get(ctarget);
+		return null;
+	}
+
 	public static void switchto(Karte k, boolean unten)
 	{
+		changed = true;
 		if(toSwitch == null)
 		{
 			distance = 0;
@@ -54,6 +65,7 @@ public class KarteSwitcher
 
 	public static void tick()
 	{
+		changed = false;
 		if(toSwitch == null)
 			return;
 		XKarte.aktuell = null;

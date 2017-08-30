@@ -63,8 +63,10 @@ public class NPKarte extends Karte<Bodenteil> implements CharaTransferer
 		for(int x = 0; x < xw; x++)
 			for(int y = 0; y < yw; y++)
 				fliesen[x][y].tick();
-		if(this == XKarte.aktuell && TA.take[65] == 2)
+		if(!KarteSwitcher.changed && this == KarteSwitcher.ctarget() && TA.take[65] == 2 && schichten.karte(level - 1) != null)
 			KarteSwitcher.switchto(schichten.karte(level - 1), true);
+		if(!KarteSwitcher.changed && this == KarteSwitcher.ctarget() && TA.take[66] == 2 && schichten.karte(level + 1) != null)
+			KarteSwitcher.switchto(schichten.karte(level + 1), false);
 	}
 
 	public FluidG surroundcheckNewField(int x, int y, int r)

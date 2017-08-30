@@ -21,6 +21,10 @@ public class Schichten
 
 	public NPKarte karte(int level)
 	{
+		if(level < -maxdepth)
+			return null;
+		if(level > maxheight)
+			return null;
 		return karten[level + maxdepth];
 	}
 }
