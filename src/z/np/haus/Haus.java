@@ -141,7 +141,6 @@ public class Haus extends KChara<NPKarte> implements EnergieTransferer, MaterieT
 		return ir != null ? ir.maxCharas() : 0;
 	}
 
-	//TODO
 	@Override
 	public ArrayList<int[]> tasten1()
 	{
@@ -154,7 +153,7 @@ public class Haus extends KChara<NPKarte> implements EnergieTransferer, MaterieT
 	public ArrayList<Exec> optionen1()
 	{
 		ArrayList<Exec> re = new ArrayList<>();
-		re.add(new Exec("Info", h -> XKarte.gui.add(new UIAnschluss(0, 0, new HausGUI((Haus) h))), this));
+		re.add(new Exec("Info", h -> XKarte.gui.add(new UIAnschluss(0, 0, new HausGUI(this))), this));
 		return re;
 	}
 

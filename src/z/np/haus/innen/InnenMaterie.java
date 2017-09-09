@@ -25,7 +25,7 @@ public class InnenMaterie extends InnenTeil implements MaterieTransferer
 		kapazitaet = anteil * anteil / 10;
 		long zuviel = menge - kapazitaet;
 		if(zuviel > 0)
-			for(MaterieTyp tr : inhalt.keySet().stream().sorted(Comparator.comparingInt(Enum::ordinal)).collect(Collectors.toList()))
+			for(MaterieTyp tr : inhalt.keySet().stream().sorted(Comparator.comparingInt(e -> e.num)).collect(Collectors.toList()))
 				if(inhalt.get(tr) >= zuviel)
 				{
 					inhalt.put(tr, inhalt.get(tr) - zuviel);

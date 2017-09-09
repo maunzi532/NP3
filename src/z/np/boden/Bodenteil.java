@@ -1,5 +1,6 @@
 package z.np.boden;
 
+import idk.*;
 import interf.*;
 import java.awt.*;
 import java.io.*;
@@ -116,17 +117,20 @@ public class Bodenteil extends Feld implements MaterieTransferer, ItemTransferer
 		return 1;
 	}
 
-	//TODO
 	@Override
 	public ArrayList<int[]> tasten1()
 	{
-		return new ArrayList<>();
+		ArrayList<int[]> re = new ArrayList<>();
+		re.add(new int[]{77, 203});
+		return re;
 	}
 
 	@Override
 	public ArrayList<Exec> optionen1()
 	{
-		return new ArrayList<>();
+		ArrayList<Exec> re = new ArrayList<>();
+		re.add(new Exec("Info", b -> XKarte.gui.add(new UIAnschluss(0, 0, new BodenGUI(this))), this));
+		return re;
 	}
 
 	@Override

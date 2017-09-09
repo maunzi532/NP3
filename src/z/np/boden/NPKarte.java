@@ -30,7 +30,10 @@ public class NPKarte extends Karte<Bodenteil> implements CharaTransferer
 				if((x == 5 || x == 6) && y == 1)
 				{
 					f.fluidG = new FluidG(f);
-					f.fluidG.acceptMaterie(new Materie(MaterieTyp.WASSER, 16), true);
+					//f.fluidG.acceptMaterie(new Materie(MaterieTyp.WASSER, 6), true);
+					//f.fluidG.acceptMaterie(new Materie(MaterieTyp.LAVA, 2), true);
+					//f.fluidG.acceptMaterie(new Materie(MaterieTyp.ERDE1, 4), true);
+					f.fluidG.acceptMaterie(new Materie(MaterieTyp.STEIN1, 2), true);
 				}
 				if(f.fluidG != null)
 					pools.add(f.fluidG);

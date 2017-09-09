@@ -7,11 +7,11 @@ public class InfoTimed extends UITeil
 	String text;
 	boolean center;
 	int ticks;
-	int ticksA;
+	public int ticksA;
 
-	public InfoTimed(String text, boolean center, int ticks, int cascade, int... location)
+	public InfoTimed(String text, boolean center, int ticks, int... location)
 	{
-		super(cascade, location);
+		super(0, location);
 		this.text = text;
 		this.center = center;
 		this.ticks = ticks;
