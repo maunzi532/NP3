@@ -8,7 +8,7 @@ public class Balken extends Clickbar
 	String name;
 	Color farbe1;
 	Color farbe2;
-	long wert;
+	public long wert;
 	long max;
 	long ende;
 	UITeil davor;
