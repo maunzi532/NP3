@@ -4,7 +4,7 @@ import interf.*;
 import java.util.*;
 import java.util.function.*;
 
-public abstract class TView1<T> extends UITeil
+public abstract class TView1<T> extends TabTeil
 {
 	long code;
 	ItemArea<T> area;

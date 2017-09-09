@@ -20,4 +20,10 @@ public class CharaView extends TView1<NPChara>
 		weg1(transferer.zeigeCharas());
 		return super.weg();
 	}
+
+	@Override
+	public String tabname()
+	{
+		return "Charas";
+	}
 }

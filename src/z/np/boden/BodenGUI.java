@@ -4,7 +4,7 @@ import interf.*;
 import java.awt.*;
 import z.np.transfer.*;
 
-public class BodenGUI extends XArea
+public class BodenGUI extends TabXArea
 {
 	Bodenteil b;
 

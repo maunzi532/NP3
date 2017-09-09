@@ -20,4 +20,10 @@ public class ItemView extends TView1<Item>
 		weg1(transferer.zeigeItems());
 		return super.weg();
 	}
+
+	@Override
+	public String tabname()
+	{
+		return "Items";
+	}
 }
