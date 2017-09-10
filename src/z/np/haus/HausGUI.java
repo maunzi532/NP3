@@ -16,8 +16,12 @@ public class HausGUI extends TabXArea
 		ArrayList<TabTeil> views1 = new ArrayList<>();
 		if(h.zeigeCharas() != null)
 			views1.add(new CharaView(h, e -> new HausGUIChara(h, e)));
-		//if(h.zeigeItems() != null)
-			views1.add(new ItemView(h, e -> null/*new HausGUIItem(h, e)*/));
+		if(h.zeigeItems() != null)
+			views1.add(new ItemView(h));
+		if(h.zeigeMaterie() != null)
+			views1.add(new MaterieView(h));
+		if(h.zeigeEnergie() != null)
+			views1.add(new EnergieView(h));
 		init(views1.toArray(new TabTeil[views1.size()]));
 	}
 }

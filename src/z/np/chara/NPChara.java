@@ -1,4 +1,4 @@
-package z.np;
+package z.np.chara;
 
 import auftrag.*;
 import idk.*;
@@ -7,6 +7,7 @@ import java.util.*;
 import karte.*;
 import mark.*;
 import pfadfind.*;
+import z.np.*;
 import z.np.boden.*;
 import z.np.haus.*;
 import z.np.transfer.*;
@@ -98,7 +99,8 @@ public class NPChara extends KChara<NPKarte> implements EnergieTransferer, Mater
 	public HashMap<MaterieTyp, Long> zeigeMaterie()
 	{
 		HashMap<MaterieTyp, Long> mat = new HashMap<>();
-		mat.put(therm.typ, therm.menge);
+		if(therm != null)
+			mat.put(therm.typ, therm.menge);
 		return mat;
 	}
 
@@ -136,11 +138,11 @@ public class NPChara extends KChara<NPKarte> implements EnergieTransferer, Mater
 		return itemlimit;
 	}
 
-	//TODO
 	@Override
 	public ArrayList<int[]> tasten1()
 	{
 		ArrayList<int[]> re = new ArrayList<>();
+		re.add(new int[]{77, 203});
 		re.add(new int[]{71});
 		return re;
 	}
@@ -149,6 +151,7 @@ public class NPChara extends KChara<NPKarte> implements EnergieTransferer, Mater
 	public ArrayList<Exec> optionen1()
 	{
 		ArrayList<Exec> re = new ArrayList<>();
+		re.add(new Exec("Info", c -> XKarte.gui.add(new UIAnschluss(0, 0, new CharaGUI(this))), this));
 		if(auf.fliese(x, y).fluidG == null)
 			re.add(new Exec("Graben", c ->
 					((KChara) c).extraAuftrag(new Graben(((KObjekt<NPKarte>) c).auf.fliese(c.ort().x, c.ort().y))), this));

@@ -5,6 +5,7 @@ import java.util.*;
 import karte.*;
 import mark.*;
 import z.np.boden.*;
+import z.np.chara.*;
 import z.np.haus.*;
 
 public class NPXtb extends Xtb

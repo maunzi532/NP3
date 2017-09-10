@@ -2,7 +2,7 @@ package z.np.transfer;
 
 import interf.*;
 import java.util.function.*;
-import z.np.*;
+import z.np.chara.*;
 
 public class CharaView extends TView1<NPChara>
 {

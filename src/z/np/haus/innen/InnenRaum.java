@@ -1,7 +1,7 @@
 package z.np.haus.innen;
 
 import java.util.*;
-import z.np.*;
+import z.np.chara.*;
 import z.np.haus.*;
 import z.np.transfer.*;
 

@@ -3,6 +3,7 @@ package z.np.haus;
 import java.util.*;
 import z.np.*;
 import z.np.boden.*;
+import z.np.chara.*;
 import z.np.haus.innen.*;
 
 public class SchachtEingang extends Haus

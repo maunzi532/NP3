@@ -7,6 +7,7 @@ import mark.*;
 import pfadfind.*;
 import z.np.*;
 import z.np.boden.*;
+import z.np.chara.*;
 import z.np.haus.innen.*;
 import z.np.transfer.*;
 
@@ -22,6 +23,9 @@ public class Haus extends KChara<NPKarte> implements EnergieTransferer, MaterieT
 	{
 		super(x, y, xg, yg, sichtbar, solide, auf);
 		innen.put(InnenTeilTyp.RAUM, new InnenRaum(this, 150));
+		//innen.put(InnenTeilTyp.ITEMORDNER, new InnenItems(this, 150));
+		//innen.put(InnenTeilTyp.MATERIELAGER, new InnenMaterie(this, 150));
+		//innen.put(InnenTeilTyp.ENERGIESPEICHER, new InnenEnergie(this, 150));
 	}
 
 	public InnenTeil getInnenTeil(InnenTeilTyp typ)

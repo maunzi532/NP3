@@ -1,4 +1,4 @@
-package z.np;
+package z.np.chara;
 
 public enum NTyp
 {

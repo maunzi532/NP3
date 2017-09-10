@@ -1,7 +1,7 @@
-package z.np.haus;
+package z.np.chara;
 
 import auftrag.*;
-import z.np.*;
+import z.np.haus.*;
 
 public class BetreteZiel extends Auftrag<NPChara>
 {

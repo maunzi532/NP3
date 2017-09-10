@@ -1,7 +1,7 @@
 package z.np.boden;
 
 import auftrag.*;
-import z.np.*;
+import z.np.chara.*;
 
 public class Graben extends Auftrag<NPChara>
 {

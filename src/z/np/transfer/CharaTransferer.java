@@ -1,7 +1,7 @@
 package z.np.transfer;
 
 import java.util.*;
-import z.np.*;
+import z.np.chara.*;
 
 public interface CharaTransferer
 {

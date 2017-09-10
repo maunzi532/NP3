@@ -4,6 +4,7 @@ import idk.*;
 import java.util.*;
 import karte.*;
 import z.np.boden.*;
+import z.np.chara.*;
 import z.np.transfer.*;
 
 public class Portal extends KObjekt implements CharaTransferer

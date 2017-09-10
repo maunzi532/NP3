@@ -1,7 +1,7 @@
 package z.np.haus;
 
 import interf.*;
-import z.np.*;
+import z.np.chara.*;
 
 public class HausGUIChara extends Clickbar
 {

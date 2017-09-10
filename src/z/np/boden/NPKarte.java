@@ -4,7 +4,7 @@ import idk.*;
 import java.util.*;
 import karte.*;
 import pfadfind.*;
-import z.np.*;
+import z.np.chara.*;
 import z.np.transfer.*;
 
 public class NPKarte extends Karte<Bodenteil> implements CharaTransferer
