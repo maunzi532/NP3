@@ -30,8 +30,11 @@ public class TabXArea extends Clickbar
 					1 - views.length + i * 2, views.length, -11, 10, 1, views.length, 1, 10);
 			in.add(tabs[i]);
 		}
-		tabs[tab].focused = true;
-		in.add(views[tab]);
+		if(views.length > 0)
+		{
+			tabs[tab].focused = true;
+			in.add(views[tab]);
+		}
 	}
 
 	@Override
@@ -77,7 +80,8 @@ public class TabXArea extends Clickbar
 				tabs[tab].focused = true;
 				in.add(views[tab]);
 			}
-		views[tab].weg();
+		if(views.length > tab)
+			views[tab].weg();
 		return weg;
 	}
 }

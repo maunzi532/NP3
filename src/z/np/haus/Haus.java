@@ -23,9 +23,11 @@ public class Haus extends KChara<NPKarte> implements EnergieTransferer, MaterieT
 	{
 		super(x, y, xg, yg, sichtbar, solide, auf);
 		innen.put(InnenTeilTyp.RAUM, new InnenRaum(this, 150));
-		//innen.put(InnenTeilTyp.ITEMORDNER, new InnenItems(this, 150));
-		//innen.put(InnenTeilTyp.MATERIELAGER, new InnenMaterie(this, 150));
-		//innen.put(InnenTeilTyp.ENERGIESPEICHER, new InnenEnergie(this, 150));
+		innen.put(InnenTeilTyp.ITEMORDNER, new InnenItems(this, 150));
+		innen.put(InnenTeilTyp.MATERIELAGER, new InnenMaterie(this, 150));
+		innen.put(InnenTeilTyp.ENERGIESPEICHER, new InnenEnergie(this, 150));
+		acceptEnergie(10, true);
+		acceptMaterie(new Materie(MaterieTyp.ERDE1, 2), true);
 	}
 
 	public InnenTeil getInnenTeil(InnenTeilTyp typ)
